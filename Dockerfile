@@ -28,8 +28,6 @@ RUN chown -R appuser:appgroup /app
 RUN mkdir -p /app/staticcollection /app/media && \
     chown -R appuser:appgroup /app/staticcollection /app/media
 
-RUN python manage.py collectstatic --noinput
-
 USER appuser
 
 EXPOSE 8111

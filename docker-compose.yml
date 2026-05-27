@@ -9,7 +9,7 @@ services:
     volumes:
       - ./db.sqlite3:/app/db.sqlite3
       - ./media:/app/media
-      - ./staticcollection:/app/staticcollection:ro
+      - ./staticcollection:/app/staticcollection
       - ./.env:/app/.env:ro
 
 networks:
