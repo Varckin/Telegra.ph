@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div id="viewer-container">
+        <article>
+            <h1 id="post-title-view">{{ post.title }}</h1>
+
+            <div class="post-meta">
+                <span class="created-at">{{ post.created_at|date:"d.m.Y H:i" }}</span>
+                <span class="edited-line">
+                    {% if post.updated_at != post.created_at %}
+                    · edited {{ post.updated_at|date:"d.m.Y H:i" }}
+                    {% endif %}
+                </span>
+            </div>
+
+            <div id="post-content-view" class="content">
+                {{ html_content|safe }}
+            </div>
+        </article>
+
+        {% if can_edit %}
+        <div class="edit-button-wrapper">
+            <button id="edit-button" class="edit-btn">
+                Edit
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+    <div id="editor-container">
+        <form
+            id="edit-form"
+            data-slug="{{ post.slug }}"
+            data-original-title="{{ post.title }}"
+        >
+            {% csrf_token %}
+
+            <div class="edit-form-group">
+                <input
+                    type="text"
+                    id="edit-title"
+                    name="title"
+                    class="edit-input"
+                    placeholder="Title"
+                    value="{{ post.title }}"
+                >
+            </div>
+
+            <div class="edit-form-group">
+                <textarea
+                    id="edit-content"
+                    name="content"
+                    class="edit-textarea"
+                    rows="15"
+                    placeholder="Content"
+                >{{ post.content }}</textarea>
+            </div>
+
+            <div class="edit-actions">
+                <button
+                    type="submit"
+                    id="publish-button"
+                    class="save-btn"
+                >
+                    Save
+                </button>
+
+                <button
+                    type="button"
+                    id="cancel-button"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <p class="back-link">
+        <a href="/">
+            ← Create new post
+        </a>
+    </p>
+{% endblock %}
