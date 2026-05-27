@@ -1,0 +1,17 @@
+services:
+  telegraph:
+    build: .
+    container_name: telegraph
+    user: "1000:1000"
+    restart: unless-stopped
+    networks:
+      - xyz
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3
+      - ./media:/app/media
+      - ./staticcollection:/app/staticcollection:ro
+      - ./.env:/app/.env:ro
+
+networks:
+  xyz:
+    external: true
