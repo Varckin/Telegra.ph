@@ -22,8 +22,10 @@ A lightweight, Markdown‑based publishing platform inspired by https://telegra.
    Python 3.12 or higher, pip and venv (or Docker, docker uses a faster and more reliable uv package manager)
 
 2. Clone the repository  
+   ```
    git clone https://github.com/varckin/telegra.ph.git  
    cd telegra.ph
+   ```
 
 3. Environment configuration  
    Create a .env file (example .env.example) in the project root (next to manage.py)
