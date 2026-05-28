@@ -7,8 +7,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     && rm -rf /var/lib/apt/lists/*
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN uv venv $VIRTUAL_ENV
+
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv pip install -r requirements.txt
 
 # ==================== STAGE 2: Final ====================
 FROM python:3.12-slim
@@ -18,12 +24,13 @@ RUN addgroup --gid 1000 appgroup && \
 
 WORKDIR /app
 
-COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=builder /opt/venv /opt/venv
 
-COPY . .
+ENV PATH="/opt/venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
-RUN chown -R appuser:appgroup /app
+COPY --chown=appuser:appgroup . .
 
 RUN mkdir -p /app/staticcollection /app/media && \
     chown -R appuser:appgroup /app/staticcollection /app/media
