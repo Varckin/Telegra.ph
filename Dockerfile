@@ -30,7 +30,8 @@ ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 
-COPY --chown=appuser:appgroup . .
+COPY . .
+RUN chown -R appuser:appgroup /app
 
 RUN mkdir -p /app/staticcollection /app/media && \
     chown -R appuser:appgroup /app/staticcollection /app/media
