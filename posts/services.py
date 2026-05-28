@@ -46,7 +46,7 @@ def safe_markdown(content: str) -> str:
 
     return nh3.clean(raw_html, tags=allowed_tags,
                      attributes=allowed_attributes, url_schemes={"http", "https", "mailto"},
-                     link_rel="noopener noreferrer", strip=True)
+                     link_rel="noopener noreferrer")
 
 def get_or_create_author_from_cookie(request: HttpRequest) -> tuple[Author, bool]:
     token = request.COOKIES.get(CONSTANTS.AUTHOR_COOKIE_NAME)
