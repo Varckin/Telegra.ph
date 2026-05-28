@@ -26,7 +26,7 @@ def safe_markdown(content: str) -> str:
     }
 
     allowed_attributes: dict[str, set[str]] = {
-        "a": {"href", "title", "target", "rel"},
+        "a": {"href", "title", "target"},
         "img": {"src", "alt", "title", "width", "height", "loading"},
         "iframe": {
             "src", "title", "width", "height",
