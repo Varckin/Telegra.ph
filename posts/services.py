@@ -13,7 +13,40 @@ def safe_markdown(content: str) -> str:
         extensions=CONSTANTS.MARKDOWN_EXTENSIONS,
     )
 
-    return nh3.clean(raw_html)
+    allowed_tags: set[str] = {
+        "h1", "h2", "h3", "h4", "h5", "h6", "p", "br", "hr",
+        "strong", "em", "del", "s", "i", "b", "u",
+        "sup", "sub", "mark", "kbd", "abbr", "cite", "q",
+        "a", "img",
+        "ul", "ol", "li", "dl", "dt", "dd",
+        "blockquote", "pre", "code",
+        "table", "thead", "tbody", "tr", "th", "td",
+        "span", "div", "figure", "figcaption", "details", "summary",
+        "iframe", "video", "source",
+    }
+
+    allowed_attributes: dict[str, set[str]] = {
+        "a": {"href", "title", "target", "rel"},
+        "img": {"src", "alt", "title", "width", "height", "loading"},
+        "iframe": {
+            "src", "title", "width", "height",
+            "frameborder", "allowfullscreen", "allow",
+            "referrerpolicy", "loading", "class",
+        },
+        "video": {
+            "src", "width", "height",
+            "controls", "autoplay", "loop", "muted",
+            "poster", "preload", "playsinline",
+        },
+        "source": {"src", "type"},
+        "td": {"align", "valign", "colspan", "rowspan"},
+        "th": {"align", "valign", "colspan", "rowspan", "scope"},
+        "code": {"class"},
+    }
+
+    return nh3.clean(raw_html, tags=allowed_tags,
+                     attributes=allowed_attributes, url_schemes={"http", "https", "mailto"},
+                     link_rel="noopener noreferrer", strip=True)
 
 def get_or_create_author_from_cookie(request: HttpRequest) -> tuple[Author, bool]:
     token = request.COOKIES.get(CONSTANTS.AUTHOR_COOKIE_NAME)

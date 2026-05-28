@@ -43,6 +43,62 @@ function formatDateRU(dateString) {
 }
 
 function createEditor(element) {
+    const customVideoButton = {
+        name: "video",
+        action: function(editor) {
+            const input = prompt("Enter URL or HTML code for the video:");
+            if (!input) return;
+            
+            let trimmedInput = input.trim();
+            
+            if (trimmedInput.startsWith("<iframe") || trimmedInput.startsWith("<video")) {
+                editor.codemirror.replaceSelection(trimmedInput + "\n");
+                return;
+            }
+
+            let embedCode = "";
+            let trimmedUrl = trimmedInput;
+            
+            let ytMatch = trimmedUrl.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/|live\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (ytMatch) {
+                const isShort = trimmedUrl.includes("/shorts/");
+                const shortClass = isShort ? ' class="youtube-short"' : '';
+                
+                embedCode = `<iframe${shortClass} width="560" height="315" src="https://www.youtube-nocookie.com/embed/${ytMatch[1]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>\n`;
+            }
+            
+            else if (trimmedUrl.includes("vimeo.com")) {
+                let vimeoId = trimmedUrl.split("/").pop().split("?")[0];
+                embedCode = `<iframe src="https://player.vimeo.com/video/${vimeoId}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>\n`;
+            }
+            
+            else if (trimmedUrl.includes("rutube.ru")) {
+                let rutubeMatch = trimmedUrl.match(/rutube\.ru\/video\/([a-zA-Z0-9]+)\//);
+                if (!rutubeMatch) rutubeMatch = trimmedUrl.match(/rutube\.ru\/play\/embed\/([a-zA-Z0-9]+)/);
+                if (rutubeMatch) {
+                    embedCode = `<iframe width="560" height="315" src="https://rutube.ru/play/embed/${rutubeMatch[1]}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>\n`;
+                }
+            }
+            
+            if (!embedCode && trimmedUrl.match(/\.(mp4|webm|ogg)(\?.*)?$/i)) {
+                embedCode = `<video width="560" height="315" controls>\n  <source src="${trimmedUrl}">\n  Your browser does not support the video tag.\n</video>\n`;
+            }
+            
+            if (!embedCode) {
+                if (trimmedUrl.startsWith("http://") || trimmedUrl.startsWith("https://") || trimmedUrl.startsWith("//")) {
+                    embedCode = `<iframe width="560" height="315" src="${trimmedUrl}" frameborder="0" allowfullscreen></iframe>\n`;
+                } else {
+                    alert("Invalid URL. Please insert a URL starting with http:// or https://, or the ready HTML code.");
+                    return;
+                }
+            }
+            
+            editor.codemirror.replaceSelection(embedCode);
+        },
+        className: "fa fa-video-camera",
+        title: "Insert Video",
+    };
+
     return new EasyMDE({
         element,
         spellChecker: false,
@@ -72,6 +128,7 @@ function createEditor(element) {
             '|',
             'link',
             'image',
+            customVideoButton,
             'table',
             'horizontal-rule',
             '|',
