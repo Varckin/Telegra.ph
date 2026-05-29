@@ -20,6 +20,11 @@
             {% block content %}{% endblock %}
         </div>
 
+        <footer class="site-footer">
+            <p>© {% now "Y" %} QuickNote — Fast instant notes without registration</p>
+            <p>Creator ⚡ <a href="https://varckin.xyz" target="_blank" rel="noopener noreferrer">Markus Varckin</a></p>
+        </footer>
+
         <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
         <script src="{% static 'js/base.js' %}"></script>
     </body>

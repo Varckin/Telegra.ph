@@ -17,9 +17,7 @@
 
 body {
     background-color: var(--bg-primary);
-
     color: var(--text-primary);
-
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -28,17 +26,16 @@ body {
         Helvetica,
         Arial,
         sans-serif;
-
     line-height: 1.7;
-
     animation: fadeIn 0.4s ease-out;
+    min-height: auto;
+    display: block;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -46,18 +43,15 @@ body {
 
 .container {
     width: min(100%, 1100px);
-
     margin: 0 auto;
-
     padding: 2rem clamp(1.25rem, 4vw, 3rem);
+    min-height: auto;
 }
 
 .create-form {
     display: flex;
     flex-direction: column;
-
     gap: 2rem;
-
     animation: fadeInUp 0.5s ease-out;
 }
 
@@ -66,7 +60,6 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -83,30 +76,20 @@ body {
 .edit-input,
 .edit-textarea {
     width: 100%;
-
     background: transparent;
-
     border: none;
-
     color: var(--text-primary);
-
     font-family: inherit;
-
     outline: none;
 }
 
 .telegraph-input,
 .edit-input {
-    border-bottom:
-        1px solid var(--border-color);
-
+    border-bottom: 1px solid var(--border-color);
     font-size: 2.2rem;
     font-weight: 700;
-
     padding: 0.75rem 0;
-
-    transition:
-        border-color var(--transition-fast);
+    transition: border-color var(--transition-fast);
 }
 
 .telegraph-input:focus,
@@ -117,34 +100,23 @@ body {
 .telegraph-textarea,
 .edit-textarea {
     font-size: 1.05rem;
-
     line-height: 1.9;
-
     resize: vertical;
 }
 
 .publish-btn,
 .save-btn {
     width: fit-content;
-
     align-self: flex-start;
-
     background-color: var(--accent);
-
     border: none;
-
     border-radius: 999px;
-
     color: white;
-
     cursor: pointer;
-
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-
     padding: 0.8rem 2rem;
-
     transition:
         background-color var(--transition-fast),
         transform var(--transition-fast);
@@ -153,7 +125,6 @@ body {
 .publish-btn:hover,
 .save-btn:hover {
     background-color: var(--accent-hover);
-
     transform: translateY(-1px);
 }
 
@@ -164,28 +135,16 @@ body {
 
 .alert {
     position: fixed;
-
     top: 20px;
     right: 20px;
-
     z-index: 1000;
-
     max-width: 320px;
-
     background-color: #242424;
-
-    border:
-        1px solid var(--border-color);
-
-    border-left:
-        4px solid var(--accent);
-
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent);
     border-radius: 10px;
-
     color: var(--text-primary);
-
     padding: 1rem 1.2rem;
-
     animation: slideInRight 0.3s ease-out;
 }
 
@@ -194,7 +153,6 @@ body {
         opacity: 0;
         transform: translateX(30px);
     }
-
     to {
         opacity: 1;
         transform: translateX(0);
@@ -207,11 +165,8 @@ body {
 
 .back-link a {
     color: var(--text-secondary);
-
     text-decoration: none;
-
-    transition:
-        color var(--transition-fast);
+    transition: color var(--transition-fast);
 }
 
 .back-link a:hover {
@@ -220,9 +175,7 @@ body {
 
 #viewer-container,
 #editor-container {
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 #editor-container {
@@ -233,22 +186,18 @@ body {
     font-size: 2.8rem;
     font-weight: 700;
     line-height: 1.2;
-
     margin-bottom: 1rem;
 }
 
 .post-meta {
     color: var(--text-secondary);
-
     font-size: 0.9rem;
-
     margin-bottom: 2rem;
 }
 
 .content {
     font-size: 1.08rem;
     line-height: 1.9;
-
     word-break: break-word;
 }
 
@@ -267,7 +216,6 @@ body {
 .content h4 {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
-
     line-height: 1.3;
 }
 
@@ -282,56 +230,38 @@ body {
 
 .content img {
     max-width: 100%;
-
     border-radius: 12px;
-
     margin: 2rem 0;
 }
 
 .content pre {
     background: #242424;
-
-    border:
-        1px solid var(--border-color);
-
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-
     overflow-x: auto;
-
     padding: 1.25rem;
 }
 
 .content code {
-    font-family:
-        "Fira Code",
-        "JetBrains Mono",
-        monospace;
+    font-family: "Fira Code", "JetBrains Mono", monospace;
 }
 
 .content blockquote {
-    border-left:
-        3px solid var(--accent);
-
+    border-left: 3px solid var(--accent);
     color: #c9c9c9;
-
     padding-left: 1rem;
-
     opacity: 0.95;
 }
 
 .content table {
     width: 100%;
-
     border-collapse: collapse;
 }
 
 .content th,
 .content td {
-    border:
-        1px solid var(--border-color);
-
+    border: 1px solid var(--border-color);
     padding: 0.75rem;
-
     text-align: left;
 }
 
@@ -344,11 +274,9 @@ body {
     max-width: 100%;
     aspect-ratio: 16 / 9;
     display: block;
-    
     border-radius: 12px;
     margin: 2rem 0;
-    
-    background: #000; 
+    background: #000;
     border: none;
 }
 
@@ -357,9 +285,7 @@ body {
     max-width: 320px;
     margin: 2.5rem auto;
     border-radius: 16px;
-
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
-                0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 600px) {
@@ -375,19 +301,11 @@ body {
 .edit-btn,
 .cancel-btn {
     background: transparent;
-
-    border:
-        1px solid var(--border-color);
-
+    border: 1px solid var(--border-color);
     border-radius: 999px;
-
     color: var(--text-secondary);
-
     cursor: pointer;
-
-    padding:
-        0.7rem 1.5rem;
-
+    padding: 0.7rem 1.5rem;
     transition:
         border-color var(--transition-fast),
         color var(--transition-fast),
@@ -397,9 +315,7 @@ body {
 .edit-btn:hover,
 .cancel-btn:hover {
     border-color: var(--accent);
-
     color: var(--accent);
-
     transform: translateY(-1px);
 }
 
@@ -409,19 +325,14 @@ body {
 
 .edit-label {
     display: block;
-
     color: var(--text-secondary);
-
     font-size: 0.9rem;
-
     margin-bottom: 0.75rem;
 }
 
 .edit-actions {
     display: flex;
-
     gap: 1rem;
-
     margin-top: 2rem;
 }
 
@@ -431,11 +342,8 @@ body {
 
 .EasyMDEContainer .editor-toolbar {
     background: transparent;
-
     border: none;
-
     opacity: 0.75;
-
     transition: opacity var(--transition-fast);
 }
 
@@ -445,27 +353,20 @@ body {
 
 .EasyMDEContainer .editor-toolbar button {
     color: var(--text-secondary);
-
     border-radius: 6px;
 }
 
 .EasyMDEContainer .editor-toolbar button:hover {
     background: #242424;
-
     border-color: transparent;
 }
 
 .EasyMDEContainer .CodeMirror {
     background: transparent;
-
     color: var(--text-primary);
-
     border: none;
-
     font-size: 1.05rem;
-
     line-height: 1.9;
-
     min-height: 400px;
 }
 
@@ -484,11 +385,8 @@ body {
 .EasyMDEContainer .editor-preview,
 .EasyMDEContainer .editor-preview-side {
     background: var(--bg-primary);
-
     color: var(--text-primary);
-
     padding: 2rem;
-
     line-height: 1.9;
 }
 
@@ -502,35 +400,23 @@ body {
 
 .EasyMDEContainer .CodeMirror-fullscreen {
     background: var(--bg-primary);
-
     color: var(--text-primary);
 }
 
 .EasyMDEContainer .editor-preview pre,
 .EasyMDEContainer .editor-preview-side pre {
     background: #242424;
-
-    border:
-        1px solid var(--border-color);
-
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-
     padding: 1.25rem;
-
     overflow-x: auto;
 }
 
 .EasyMDEContainer .editor-preview code,
 .EasyMDEContainer .editor-preview-side code {
     background: transparent;
-
     color: var(--text-primary);
-
-    font-family:
-        "Fira Code",
-        "JetBrains Mono",
-        monospace;
-
+    font-family: "Fira Code", "JetBrains Mono", monospace;
     font-size: 0.95rem;
 }
 
@@ -539,16 +425,13 @@ body {
 .EasyMDEContainer .editor-preview li code,
 .EasyMDEContainer .editor-preview-side li code {
     background: #2f2f2f;
-
     border-radius: 6px;
-
     padding: 0.15rem 0.4rem;
 }
 
 .EasyMDEContainer .editor-preview .hljs,
 .EasyMDEContainer .editor-preview-side .hljs {
     background: transparent !important;
-
     color: var(--text-primary) !important;
 }
 
@@ -603,4 +486,29 @@ body {
     margin: 1.5rem auto;
     display: block;
     border-radius: 16px;
+}
+
+.site-footer {
+    margin-top: 0;
+    padding: 2rem 0 1.5rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background-color: transparent;
+}
+
+.site-footer p {
+    margin-bottom: 0.5rem;
+}
+
+.site-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.site-footer a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
 }
