@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page not found</h1>
+    <p class="error-message">
+        The note you're looking for doesn't exist, has been removed, or the link is broken.
+    </p>
+    <div class="back-link">
+        <a href="{% url 'post_create' %}">← Back to home</a>
+    </div>
+</div>
+{% endblock %}
