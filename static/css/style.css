@@ -550,3 +550,16 @@ body {
     align-items: center;
     gap: 0.5rem;
 }
+
+.language-selector {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.language-form {
+    margin-top: 1rem;
+}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'posts.middleware.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -129,3 +130,9 @@ STATIC_ROOT = BASE_DIR / "staticcollection"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+LOCALE_PATH = BASE_DIR / 'locales'
+LOCALE_AVAILABLE = ['en', 'ru', 'es', 'de', 'zh', 'fr', 'pl']
+LOCALE_DEFAULT = 'en'
+LOCALE_FALLBACKS = ['en']
+LOCALE_COOKIE_NAME = 'locale'

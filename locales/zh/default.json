@@ -1,0 +1,41 @@
+{
+  "site": {
+    "title": "QuickNote",
+    "description": "无需注册，即时发布。分享笔记的简单快捷方式。"
+  },
+  "footer": {
+    "text": "无需注册的快速笔记",
+    "creator": "创建者"
+  },
+  "post": {
+    "title": "标题",
+    "content": "你的故事...",
+    "publish": "发布",
+    "save": "保存",
+    "cancel": "取消",
+    "edit": "编辑",
+    "created": "帖子已创建。",
+    "updated": "帖子已更新。",
+    "invalid_form": "表单无效。",
+    "permission_denied": "权限被拒绝。",
+    "validation_error": "验证错误。",
+    "network_error": "网络错误。",
+    "title_too_long": "标题太长。",
+    "edited_prefix": "· 已编辑",
+    "create_new": "← 创建新笔记",
+    "back_home": "← 返回首页"
+  },
+  "error": {
+    "page_not_found": "页面未找到",
+    "page_not_found_message": "您查找的笔记不存在、已被删除或链接已损坏。"
+  },
+  "js": {
+    "draft_restored": "草稿已恢复",
+    "invalid_url": "无效的URL。请插入以 http:// 或 https:// 开头的URL，或现成的HTML代码。",
+    "post_created": "帖子已创建。",
+    "post_updated": "帖子已更新。",
+    "server_error": "服务器错误。",
+    "network_error": "网络错误。",
+    "failed_create": "创建帖子失败。"
+  }
+}

@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load locale_tags %}
+
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
@@ -10,7 +12,7 @@
                 <span class="created-at">{{ post.created_at|date:"d.m.Y H:i" }}</span>
                 <span class="edited-line">
                     {% if post.updated_at != post.created_at %}
-                    · edited {{ post.updated_at|date:"d.m.Y H:i" }}
+                    {% translate 'post.edited_prefix' %} {{ post.updated_at|date:"d.m.Y H:i" }}
                     {% endif %}
                 </span>
             </div>
@@ -23,7 +25,7 @@
         {% if can_edit %}
         <div class="edit-button-wrapper">
             <button id="edit-button" class="edit-btn">
-                Edit
+                {% translate 'post.edit' %}
             </button>
         </div>
         {% endif %}
@@ -64,7 +66,7 @@
                     id="publish-button"
                     class="save-btn"
                 >
-                    Save
+                    {% translate 'post.save' %}
                 </button>
 
                 <button
@@ -72,15 +74,15 @@
                     id="cancel-button"
                     class="cancel-btn"
                 >
-                    Cancel
+                    {% translate 'post.cancel' %}
                 </button>
             </div>
         </form>
     </div>
 
     <p class="back-link">
-        <a href="/">
-            ← Create new post
+        <a href="{% url 'post_create' %}">
+            {% translate 'post.create_new' %}
         </a>
     </p>
 {% endblock %}

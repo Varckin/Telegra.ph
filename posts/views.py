@@ -1,6 +1,8 @@
 from django.http import HttpRequest, HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 from posts.forms import PostForm
 from posts.models import Post
@@ -66,3 +68,13 @@ class PostDetailView(View):
                 "updated_at": post.updated_at.isoformat()
             }
         )
+
+@csrf_exempt
+def set_language(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        locale = request.POST.get('locale')
+        if locale in settings.LOCALE_AVAILABLE:
+            response = redirect(request.META.get('HTTP_REFERER', '/'))
+            response.set_cookie(settings.LOCALE_COOKIE_NAME, locale, max_age=365*24*3600)
+            return response
+    return redirect('post_create')

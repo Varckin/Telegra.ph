@@ -1,0 +1,41 @@
+{
+  "site": {
+    "title": "QuickNote",
+    "description": "Natychmiastowa publikacja bez rejestracji. Prosty i szybki sposób na udostępnianie notatek."
+  },
+  "footer": {
+    "text": "Szybkie notatki bez rejestracji",
+    "creator": "Twórca"
+  },
+  "post": {
+    "title": "Tytuł",
+    "content": "Twoja historia...",
+    "publish": "Opublikuj",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "edit": "Edytuj",
+    "created": "Post utworzony.",
+    "updated": "Post zaktualizowany.",
+    "invalid_form": "Nieprawidłowy formularz.",
+    "permission_denied": "Brak uprawnień.",
+    "validation_error": "Błąd walidacji.",
+    "network_error": "Błąd sieci.",
+    "title_too_long": "Tytuł jest zbyt długi.",
+    "edited_prefix": "· edytowano",
+    "create_new": "← Utwórz nową notatkę",
+    "back_home": "← Powrót do strony głównej"
+  },
+  "error": {
+    "page_not_found": "Strona nie znaleziona",
+    "page_not_found_message": "Notatka, której szukasz, nie istnieje, została usunięta lub link jest uszkodzony."
+  },
+  "js": {
+    "draft_restored": "Przywrócono szkic",
+    "invalid_url": "Nieprawidłowy URL. Wprowadź URL rozpoczynający się od http:// lub https://, lub gotowy kod HTML.",
+    "post_created": "Post utworzony.",
+    "post_updated": "Post zaktualizowany.",
+    "server_error": "Błąd serwera.",
+    "network_error": "Błąd sieci.",
+    "failed_create": "Nie udało się utworzyć posta."
+  }
+}

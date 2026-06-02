@@ -1,0 +1,41 @@
+{
+  "site": {
+    "title": "QuickNote",
+    "description": "Publicación instantánea sin registro. Una forma sencilla y rápida de compartir notas."
+  },
+  "footer": {
+    "text": "Notas rápidas sin registro",
+    "creator": "Creador"
+  },
+  "post": {
+    "title": "Título",
+    "content": "Tu historia...",
+    "publish": "Publicar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "created": "Post creado.",
+    "updated": "Post actualizado.",
+    "invalid_form": "Formulario inválido.",
+    "permission_denied": "Permiso denegado.",
+    "validation_error": "Error de validación.",
+    "network_error": "Error de red.",
+    "title_too_long": "El título es demasiado largo.",
+    "edited_prefix": "· editado",
+    "create_new": "← Crear nueva nota",
+    "back_home": "← Volver al inicio"
+  },
+  "error": {
+    "page_not_found": "Página no encontrada",
+    "page_not_found_message": "La nota que buscas no existe, ha sido eliminada o el enlace está roto."
+  },
+  "js": {
+    "draft_restored": "Borrador restaurado",
+    "invalid_url": "URL inválida. Inserta una URL que empiece con http:// o https://, o el código HTML listo.",
+    "post_created": "Post creado.",
+    "post_updated": "Post actualizado.",
+    "server_error": "Error del servidor.",
+    "network_error": "Error de red.",
+    "failed_create": "Error al crear el post."
+  }
+}

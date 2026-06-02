@@ -88,7 +88,7 @@ function createEditor(element) {
                 if (trimmedUrl.startsWith("http://") || trimmedUrl.startsWith("https://") || trimmedUrl.startsWith("//")) {
                     embedCode = `<iframe width="560" height="315" src="${trimmedUrl}" frameborder="0" allowfullscreen></iframe>\n`;
                 } else {
-                    alert("Invalid URL. Please insert a URL starting with http:// or https://, or the ready HTML code.");
+                    alert(window.i18n.invalid_url);
                     return;
                 }
             }
@@ -192,7 +192,7 @@ function restoreDraftWithNotification(draftKey, titleField, editor, showNotifica
     titleField.value = draft.title;
     editor.value(draft.content);
 
-    showNotificationFn('Draft restored', 'info');
+    showNotificationFn(window.i18n.draft_restored, 'info');
     return true;
 }
 
@@ -276,13 +276,13 @@ if (createForm) {
 
             if (!response.ok) {
                 const error = await response.json();
-                window.showNotification(error.error || 'Server error.', 'error');
+                window.showNotification(error.error || window.i18n.server_error, 'error');
                 return;
             }
 
             const data = await response.json();
             if (!data.redirect_url) {
-                window.showNotification('Failed to create post.', 'error');
+                window.showNotification(window.i18n.failed_create, 'error');
                 return;
             }
 
@@ -290,7 +290,7 @@ if (createForm) {
             sessionStorage.setItem('showCreatedNotification', 'true');
             window.location.href = data.redirect_url;
         } catch {
-            window.showNotification('Network error.', 'error');
+            window.showNotification(window.i18n.network_error, 'error');
         } finally {
             submitButton.textContent = originalText;
             submitButton.disabled = false;
@@ -303,7 +303,7 @@ const editForm = document.getElementById('edit-form');
 if (editForm) {
     if (sessionStorage.getItem('showCreatedNotification') === 'true') {
         sessionStorage.removeItem('showCreatedNotification');
-        window.showNotification('Post created.', 'success');
+        window.showNotification(window.i18n.post_created, 'success');
     }
 
     const viewer = document.getElementById('viewer-container');
@@ -407,7 +407,7 @@ if (editForm) {
             const data = await response.json();
 
             if (!response.ok || !data.success) {
-                window.showNotification(data.error || 'Server error.', 'error');
+                window.showNotification(data.error || window.i18n.server_error, 'error');
                 return;
             }
 
@@ -429,9 +429,9 @@ if (editForm) {
             editForm.dataset.originalTitle = originalTitle;
 
             exitEditMode();
-            window.showNotification('Post updated.', 'success');
+            window.showNotification(window.i18n.post_updated, 'success');
         } catch {
-            window.showNotification('Network error.', 'error');
+            window.showNotification(window.i18n.network_error, 'error');
         } finally {
             publishButton.textContent = originalText;
             publishButton.disabled = false;

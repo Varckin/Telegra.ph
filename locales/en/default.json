@@ -1,0 +1,41 @@
+{
+  "site": {
+    "title": "QuickNote",
+    "description": "Instant publishing without registration. A simple and fast way to share notes."
+  },
+  "footer": {
+    "text": "Fast instant notes without registration",
+    "creator": "Creator"
+  },
+  "post": {
+    "title": "Title",
+    "content": "Your story...",
+    "publish": "Publish",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "created": "Post created.",
+    "updated": "Post updated.",
+    "invalid_form": "Invalid form.",
+    "permission_denied": "Permission denied.",
+    "validation_error": "Validation error.",
+    "network_error": "Network error.",
+    "title_too_long": "Title is too long.",
+    "edited_prefix": "· edited",
+    "create_new": "← Create new post",
+    "back_home": "← Back to home"
+  },
+  "error": {
+    "page_not_found": "Page not found",
+    "page_not_found_message": "The note you're looking for doesn't exist, has been removed, or the link is broken."
+  },
+  "js": {
+    "draft_restored": "Draft restored",
+    "invalid_url": "Invalid URL. Please insert a URL starting with http:// or https://, or the ready HTML code.",
+    "post_created": "Post created.",
+    "post_updated": "Post updated.",
+    "server_error": "Server error.",
+    "network_error": "Network error.",
+    "failed_create": "Failed to create post."
+  }
+}

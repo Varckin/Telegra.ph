@@ -1,13 +1,14 @@
 {% load static %}
+{% load locale_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Instant publishing without registration. A simple and fast way to share notes.">
+        <meta name="description" content="{% translate 'site.description' %}">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-        <title>{% block title %}QuickNote{% endblock %}</title>
+        <title>{% block title %} {% translate 'site.title' %} {% endblock %}</title>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -21,11 +22,35 @@
         </div>
 
         <footer class="site-footer">
-            <p>© {% now "Y" %} QuickNote — Fast instant notes without registration</p>
-            <p>Creator ⚡ <a href="https://varckin.xyz" target="_blank" rel="noopener noreferrer">Markus Varckin</a></p>
+            <p>© {% now "Y" %} {% translate 'site.title' %} — {% translate 'footer.text' %}</p>
+                <p>{% translate 'footer.creator' %} ⚡ <a href="https://varckin.xyz" target="_blank" rel="noopener noreferrer">Markus Varckin</a></p>
+
+            <form action="{% url 'set_language' %}" method="post" class="language-form">
+                {% csrf_token %}
+                <select name="locale" onchange="this.form.submit()" class="language-selector">
+                    <option value="en" {% if request.locale == 'en' %}selected{% endif %}>English</option>
+                    <option value="ru" {% if request.locale == 'ru' %}selected{% endif %}>Русский</option>
+                    <option value="es" {% if request.locale == 'es' %}selected{% endif %}>Español</option>
+                    <option value="de" {% if request.locale == 'de' %}selected{% endif %}>Deutsch</option>
+                    <option value="zh" {% if request.locale == 'zh' %}selected{% endif %}>中文</option>
+                    <option value="fr" {% if request.locale == 'fr' %}selected{% endif %}>Français</option>
+                    <option value="pl" {% if request.locale == 'pl' %}selected{% endif %}>Polski</option>
+                </select>
+            </form>
         </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+        <script>
+            window.i18n = {
+                draft_restored: "{% translate 'js.draft_restored' %}",
+                invalid_url: "{% translate 'js.invalid_url' %}",
+                post_created: "{% translate 'js.post_created' %}",
+                post_updated: "{% translate 'js.post_updated' %}",
+                server_error: "{% translate 'js.server_error' %}",
+                network_error: "{% translate 'js.network_error' %}",
+                failed_create: "{% translate 'js.failed_create' %}"
+            };
+        </script>
         <script src="{% static 'js/base.js' %}"></script>
     </body>
 

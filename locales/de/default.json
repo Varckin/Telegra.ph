@@ -1,0 +1,41 @@
+{
+  "site": {
+    "title": "QuickNote",
+    "description": "Sofortige Veröffentlichung ohne Registrierung. Eine einfache und schnelle Möglichkeit, Notizen zu teilen."
+  },
+  "footer": {
+    "text": "Schnelle Notizen ohne Registrierung",
+    "creator": "Ersteller"
+  },
+  "post": {
+    "title": "Titel",
+    "content": "Deine Geschichte...",
+    "publish": "Veröffentlichen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten",
+    "created": "Beitrag erstellt.",
+    "updated": "Beitrag aktualisiert.",
+    "invalid_form": "Ungültiges Formular.",
+    "permission_denied": "Zugriff verweigert.",
+    "validation_error": "Validierungsfehler.",
+    "network_error": "Netzwerkfehler.",
+    "title_too_long": "Titel ist zu lang.",
+    "edited_prefix": "· bearbeitet",
+    "create_new": "← Neuen Beitrag erstellen",
+    "back_home": "← Zurück zur Startseite"
+  },
+  "error": {
+    "page_not_found": "Seite nicht gefunden",
+    "page_not_found_message": "Die gesuchte Notiz existiert nicht, wurde entfernt oder der Link ist defekt."
+  },
+  "js": {
+    "draft_restored": "Entwurf wiederhergestellt",
+    "invalid_url": "Ungültige URL. Bitte gib eine URL mit http:// oder https:// ein oder fertigen HTML-Code.",
+    "post_created": "Beitrag erstellt.",
+    "post_updated": "Beitrag aktualisiert.",
+    "server_error": "Serverfehler.",
+    "network_error": "Netzwerkfehler.",
+    "failed_create": "Beitrag konnte nicht erstellt werden."
+  }
+}

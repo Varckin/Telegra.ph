@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load locale_tags %}
 
 {% block content %}
     <form id="create-form" class="create-form">
@@ -9,7 +10,7 @@
                 type="text"
                 name="title"
                 class="telegraph-input"
-                placeholder="Title"
+                placeholder="{% translate 'post.title' %}"
                 autofocus
                 required
             >
@@ -19,13 +20,13 @@
             <textarea
                 name="content"
                 class="telegraph-textarea"
-                placeholder="Your story..."
+                placeholder="{% translate 'post.content' %}"
                 rows="12"
             ></textarea>
         </div>
 
         <button type="submit" class="publish-btn">
-            Publish
+            {% translate 'post.publish' %}
         </button>
     </form>
 {% endblock %}
