@@ -17,6 +17,74 @@ A lightweight, Markdown‑based publishing platform inspired by https://telegra.
 - Server: Uvicorn
 - Container: Docker, Docker Compose
 
+### Internationalization (i18n)
+The platform includes a full-featured localization system built on a custom i18n library. It supports:
+* JSON‑based translations (easy to edit)
+* Automatic language detection from Accept-Language header or cookie
+* User‑selectable language via a dropdown in the footer
+* Pluralization rules for multiple languages (English, Russian, German, French, etc.)
+* Live reload of translation files in debug mode
+* Template tags {% translate %} and {% pluralize %}
+* JavaScript translations via a global window.i18n object
+
+#### Supported languages
+
+| Language | Code |
+|----------|------|
+| English  | `en` |
+| Russian  | `ru` |
+| Spanish  | `es` |
+| German   | `de` |
+| French   | `fr` |
+| Chinese  | `zh` |
+| Polish   | `pl` |
+
+You can easily add more by creating a new folder under locales/ and adding the corresponding JSON file.
+
+#### Using translations in templates
+
+```
+{% load locale_tags %}
+
+<h1>{% translate "post.title" %}</h1>
+<p>{% translate "post.content" %}</p>
+<button>{% translate "post.publish" %}</button>
+
+{# Pluralization #}
+<p>{% pluralize "post.comments" count %}</p>
+```
+
+#### Using translations in JavaScript
+
+A global object window.i18n is injected in base.html. You can use it inside your JS files:
+
+```js
+window.showNotification(window.i18n.post_created, 'success');
+```
+
+#### Translation files structure
+
+```
+locales/
+├── en/default.json
+├── ru/default.json
+├── es/default.json
+├── de/default.json
+├── fr/default.json
+├── zh/default.json
+└── pl/default.json
+```
+
+Each file follows the same key hierarchy (e.g., `post.title`, `footer.creator`, `js.draft_restored`).
+
+#### How language selection works
+
+1. The `LocaleMiddleware` checks for a cookie named `locale`.
+2. If no cookie, it falls back to the `Accept-Language` header.
+3. The default language is `en`.
+4. The footer contains a form that posts to `/set_language/`, updating the cookie and redirecting back.
+
+
 ### Getting Started
 1. Prerequisites  
    Python 3.12 or higher, pip and venv (or Docker, docker uses a faster and more reliable uv package manager)
