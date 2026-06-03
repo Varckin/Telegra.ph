@@ -1,5 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
 {% load locale_tags %}
+
+{% block og_meta %}
+    <meta property="og:title" content="{{ post.title|escape }}" />
+    <meta property="og:description" content="{{ post.content|striptags|truncatechars:200|escape }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{% static 'img/preview.jpg' %}" />
+    <meta property="og:image:alt" content="{{ post.title|escape }}" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ post.title|escape }}" />
+    <meta name="twitter:description" content="{{ post.content|striptags|truncatechars:200|escape }}" />
+    <meta name="twitter:image" content="{% static 'img/preview.jpg' %}" />
+{% endblock %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
