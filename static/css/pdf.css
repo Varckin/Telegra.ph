@@ -1,9 +1,8 @@
 @page {
     size: A4;
-    margin: 2cm;
-    margin-bottom: 2.8cm;
+    margin: 2cm 2cm 3cm 2cm;
 
-    @bottom-right {
+    @bottom-center {
         content: element(footer);
     }
 }
@@ -21,9 +20,27 @@ body {
     margin-bottom: 0;
 }
 
-.spacer {
-    height: 2.5rem;
+.footer {
+    position: running(footer);
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+
     width: 100%;
+
+    border-top: 1px solid #ddd;
+    padding-top: 0.5rem;
+
+    font-size: 10pt;
+    color: #666;
+    background-color: white;
+}
+
+.footer a {
+    color: #666;
+    text-decoration: none;
 }
 
 .logo {
@@ -31,35 +48,10 @@ body {
     width: auto;
 }
 
-.footer {
-    position: running(footer);
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    gap: 5px;
-
-    border-top: 1px solid #ddd;
-    padding-top: 6px;
-
-    font-size: 10pt;
-}
-
-.footer a {
-    color: #666;
-    text-decoration: none;
-    border-bottom: none;
-}
-
-.footer a:hover {
-    color: #333;
-    text-decoration: underline;
-}
-
 .post-title {
     font-size: 28pt;
     margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 .meta {
@@ -72,6 +64,7 @@ body {
 
 .content img {
     max-width: 100%;
+    height: auto;
 }
 
 .content pre {
@@ -80,6 +73,8 @@ body {
     border-radius: 5px;
     overflow-x: auto;
     font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .content code {
@@ -106,13 +101,12 @@ body {
     font-weight: 600;
 }
 
-.content tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
 .content tr {
     page-break-inside: avoid;
-    page-break-after: auto;
+}
+
+.content tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
 .content blockquote {
@@ -122,6 +116,24 @@ body {
     color: #333;
 }
 
-.content ul, .content ol {
+.content ul,
+.content ol {
     margin: 0.5rem 0 1rem 1.5rem;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+    page-break-after: avoid;
+}
+
+.content p,
+.content ul,
+.content ol,
+.content blockquote {
+    orphans: 3;
+    widows: 3;
 }

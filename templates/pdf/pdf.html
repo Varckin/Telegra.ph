@@ -6,25 +6,33 @@
     <title>{{ post.title }}</title>
 </head>
 <body>
+    <div class="footer">
+        {% if logo_url %}
+            <img src="{{ logo_url }}" class="logo" alt="Logo">
+        {% endif %}
+
+        <a href="{% url 'post_create' %}">
+            {{ site_name }}
+        </a>
+    </div>
+
     <div class="content-wrapper">
-        <h1 class="post-title">{{ post.title }}</h1>
+
+        <h1 class="post-title">
+            {{ post.title }}
+        </h1>
+
         <div class="meta">
             Published: {{ post.created_at|date:"d.m.Y H:i" }}
+
             {% if post.updated_at != post.created_at %}
                 &nbsp;| Updated: {{ post.updated_at|date:"d.m.Y H:i" }}
             {% endif %}
         </div>
+
         <div class="content">
             {{ content_html|safe }}
         </div>
-        <div class="spacer"></div>
-    </div>
-
-    <div class="footer">
-        {% if logo_url %}
-            <img src="{{ logo_url }}" class="logo" alt="logo">
-        {% endif %}
-        <a href="{% url 'post_create' %}" target="_blank" rel="noopener noreferrer">{{ site_name }}</a>
     </div>
 </body>
 </html>
