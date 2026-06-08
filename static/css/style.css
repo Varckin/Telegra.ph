@@ -294,8 +294,10 @@ body {
     }
 }
 
-.edit-button-wrapper {
+.post-actions {
     margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
 }
 
 .edit-btn,
@@ -562,4 +564,29 @@ body {
 
 .language-form {
     margin-top: 1rem;
+}
+
+.pdf-btn,
+.pdf-button-wrapper .pdf-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.pdf-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.pdf-btn:active {
+    transform: scale(0.98);
 }

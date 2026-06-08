@@ -37,15 +37,11 @@
             </div>
         </article>
 
-        {% if can_edit %}
-        <div class="edit-button-wrapper">
-            <button id="edit-button" class="edit-btn">
-                {% translate 'post.edit' %}
-            </button>
-        </div>
-        {% endif %}
-        <div class="pdf-button-wrapper">
-            <a href="{% url 'post_pdf' slug=post.slug %}" class="pdf-btn">
+        <div class="post-actions">
+            {% if can_edit %}
+                <button id="edit-button" class="action-btn edit-btn">{% translate 'post.edit' %}</button>
+            {% endif %}
+            <a href="{% url 'post_pdf' slug=post.slug %}" class="action-btn pdf-btn" target="_blank" rel="noopener noreferrer">
                 {% translate 'post.download_pdf' %}
             </a>
         </div>
