@@ -9,11 +9,16 @@ body {
     color: #000;
     background: #fff;
     margin: 0;
-    padding: 0 0 3rem 0;
+    padding: 0;
 }
 
 .content-wrapper {
-    margin-bottom: 2rem;
+    margin-bottom: 0;
+}
+
+.spacer {
+    height: 2.5rem;
+    width: 100%;
 }
 
 .logo {
@@ -35,6 +40,17 @@ body {
     padding-top: 0.5rem;
     width: 100%;
     background: white;
+}
+
+.footer a {
+    color: #666;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.footer a:hover {
+    color: #333;
+    text-decoration: underline;
 }
 
 .post-title {

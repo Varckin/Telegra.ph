@@ -17,13 +17,14 @@
         <div class="content">
             {{ content_html|safe }}
         </div>
+        <div class="spacer"></div>
     </div>
 
     <div class="footer">
         {% if logo_url %}
             <img src="{{ logo_url }}" class="logo" alt="logo">
         {% endif %}
-        {{ site_name }}
+        <a href="{% url 'post_create' %}" target="_blank" rel="noopener noreferrer">{{ site_name }}</a>
     </div>
 </body>
 </html>
