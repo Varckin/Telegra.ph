@@ -40,7 +40,4 @@ USER appuser
 
 EXPOSE 8111
 
-COPY --chown=appuser:appgroup entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["uvicorn", "telegraph.asgi:application", "--host", "0.0.0.0", "--port", "8111", "--workers", "1"]
