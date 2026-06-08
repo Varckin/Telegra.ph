@@ -1,5 +1,4 @@
-from typing import Optional, Union
-from pathlib import Path
+from typing import Optional
 from weasyprint import HTML, CSS
 from django.template.loader import render_to_string
 from django.contrib.staticfiles import finders
