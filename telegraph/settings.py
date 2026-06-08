@@ -26,6 +26,7 @@ DEBUG = getenv("DEBUG", "False").lower() in ("true")
 # Application definition
 
 INSTALLED_APPS = [
+    'locale_i18n',
     'posts',
     'pdf_generator',
     'django.contrib.admin',
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'posts.middleware.LocaleMiddleware',
+    'locale_i18n.middleware.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
