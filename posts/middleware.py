@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
-from typing import Callable, Any
+from typing import Callable
 
 from i18n.sync.translator import Translator
 
