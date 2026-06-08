@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,22 +6,24 @@
     <title>{{ post.title }}</title>
 </head>
 <body>
-    {% if logo_url %}
-        <div class="logo-container">
-            <img src="{{ logo_url }}" class="logo" alt="Logo">
+    <div class="content-wrapper">
+        <h1 class="post-title">{{ post.title }}</h1>
+        <div class="meta">
+            Published: {{ post.created_at|date:"d.m.Y H:i" }}
+            {% if post.updated_at != post.created_at %}
+                &nbsp;| Updated: {{ post.updated_at|date:"d.m.Y H:i" }}
+            {% endif %}
         </div>
-    {% endif %}
-
-    <h1 class="post-title">{{ post.title }}</h1>
-    <div class="meta">
-        Published: {{ post.created_at|date:"d.m.Y H:i" }}
-        {% if post.updated_at != post.created_at %}
-            &nbsp;| Updated: {{ post.updated_at|date:"d.m.Y H:i" }}
-        {% endif %}
+        <div class="content">
+            {{ content_html|safe }}
+        </div>
     </div>
 
-    <div class="content">
-        {{ content_html|safe }}
+    <div class="footer">
+        {% if logo_url %}
+            <img src="{{ logo_url }}" class="logo" alt="logo">
+        {% endif %}
+        {{ site_name }}
     </div>
 </body>
 </html>
