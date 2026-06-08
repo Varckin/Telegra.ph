@@ -23,7 +23,8 @@
     "title_too_long": "Title is too long.",
     "edited_prefix": "· edited",
     "create_new": "← Create new post",
-    "back_home": "← Back to home"
+    "back_home": "← Back to home",
+    "download_pdf": "Download PDF"
   },
   "error": {
     "page_not_found": "Page not found",

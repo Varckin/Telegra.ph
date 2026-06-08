@@ -27,6 +27,7 @@ DEBUG = getenv("DEBUG", "False").lower() in ("true")
 
 INSTALLED_APPS = [
     'posts',
+    'pdf_generator',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

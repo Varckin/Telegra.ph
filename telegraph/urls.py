@@ -8,6 +8,7 @@ from telegraph.views import robots_txt
 urlpatterns = [
     path('xyz/', admin.site.urls),
     path('', include('posts.urls')),
+    path('', include('pdf_generator.urls')),
     path("robots.txt", robots_txt)
 ]
 

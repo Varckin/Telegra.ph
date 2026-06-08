@@ -23,7 +23,8 @@
     "title_too_long": "标题太长。",
     "edited_prefix": "· 已编辑",
     "create_new": "← 创建新笔记",
-    "back_home": "← 返回首页"
+    "back_home": "← 返回首页",
+    "download_pdf": "下载PDF"
   },
   "error": {
     "page_not_found": "页面未找到",

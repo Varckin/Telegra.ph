@@ -23,7 +23,8 @@
     "title_too_long": "Titel ist zu lang.",
     "edited_prefix": "· bearbeitet",
     "create_new": "← Neuen Beitrag erstellen",
-    "back_home": "← Zurück zur Startseite"
+    "back_home": "← Zurück zur Startseite",
+    "download_pdf": "PDF herunterladen"
   },
   "error": {
     "page_not_found": "Seite nicht gefunden",

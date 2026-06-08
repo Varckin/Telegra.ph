@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    {% if logo_url %}
+        <div class="logo-container">
+            <img src="{{ logo_url }}" class="logo" alt="Logo">
+        </div>
+    {% endif %}
+
+    <h1 class="post-title">{{ post.title }}</h1>
+    <div class="meta">
+        Published: {{ post.created_at|date:"d.m.Y H:i" }}
+        {% if post.updated_at != post.created_at %}
+            &nbsp;| Updated: {{ post.updated_at|date:"d.m.Y H:i" }}
+        {% endif %}
+    </div>
+
+    <div class="content">
+        {{ content_html|safe }}
+    </div>
+</body>
+</html>

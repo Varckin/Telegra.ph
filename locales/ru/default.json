@@ -23,7 +23,8 @@
     "title_too_long": "Слишком длинный заголовок.",
     "edited_prefix": "· изменено",
     "create_new": "← Создать новую заметку",
-    "back_home": "← На главную"
+    "back_home": "← На главную",
+    "download_pdf": "Скачать PDF"
   },
   "error": {
     "page_not_found": "Страница не найдена",

@@ -44,6 +44,11 @@
             </button>
         </div>
         {% endif %}
+        <div class="pdf-button-wrapper">
+            <a href="{% url 'post_pdf' slug=post.slug %}" class="pdf-btn">
+                {% translate 'post.download_pdf' %}
+            </a>
+        </div>
     </div>
 
     <div id="editor-container">

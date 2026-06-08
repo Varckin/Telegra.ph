@@ -1,0 +1,1 @@
+POSTS_LOGO_PATH = 'img/preview.jpg'

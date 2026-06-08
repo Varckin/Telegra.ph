@@ -23,7 +23,8 @@
     "title_too_long": "Tytuł jest zbyt długi.",
     "edited_prefix": "· edytowano",
     "create_new": "← Utwórz nową notatkę",
-    "back_home": "← Powrót do strony głównej"
+    "back_home": "← Powrót do strony głównej",
+    "download_pdf": "Pobierz PDF"
   },
   "error": {
     "page_not_found": "Strona nie znaleziona",
