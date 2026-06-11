@@ -11,7 +11,7 @@ env/
 db.sqlite3
 media/
 staticcollection/
-visitor_trackin/geo_lib/
+visitor_tracking/geo_lib/
 
 *.log
 
