@@ -1,6 +1,7 @@
 # Folders
 .venv/
 __pycache__/
+geo_lib/
 
 # Files
 .env

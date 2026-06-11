@@ -11,6 +11,7 @@ services:
       - ./media:/app/media
       - ./staticcollection:/app/staticcollection
       - ./.env:/app/.env:ro
+      - ./visitor_tracking/geo_lib:/app/visitor_tracking/geo_lib:ro
 
 networks:
   xyz:
