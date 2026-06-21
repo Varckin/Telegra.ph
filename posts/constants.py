@@ -14,5 +14,6 @@ class PostConstants:
         "nl2br"
     )
     MAX_LEN_TITLE: int = 255
+    MAX_LEN_CONTENT: int = 600000
 
 CONSTANTS = PostConstants()

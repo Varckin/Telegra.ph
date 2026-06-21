@@ -32,3 +32,12 @@ class PostForm(forms.ModelForm):
             )
 
         return title
+
+    def clean_content(self) -> str:
+        content = self.cleaned_data.get("content")
+        if content and len(content) > CONSTANTS.MAX_LEN_CONTENT:
+            raise forms.ValidationError(
+                f"Content is too long. Maximum {CONSTANTS.MAX_LEN_CONTENT} characters."
+            )
+
+        return content

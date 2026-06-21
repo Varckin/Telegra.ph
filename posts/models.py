@@ -1,6 +1,7 @@
 import secrets
 from django.db import models
 from django.urls import reverse
+from django.core.validators import MaxLengthValidator
 
 
 class Author(models.Model):
@@ -18,7 +19,7 @@ class Author(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    content = models.TextField(validators=[MaxLengthValidator(600000)])
     slug = models.SlugField(max_length=16, unique=True, blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="posts")
     created_at = models.DateTimeField(auto_now_add=True)
