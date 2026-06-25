@@ -19,86 +19,107 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <div id="viewer-container">
-        <article>
-            <h1 id="post-title-view">{{ post.title }}</h1>
+    <div class="container">
+        <div id="nav-sidebar" role="navigation" aria-label="Page navigation">
+            <button id="scroll-top-btn" class="nav-arrow" title="Наверх" aria-label="Наверх">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </button>
 
-            <div class="post-meta">
-                <span class="created-at">{{ post.created_at|date:"d.m.Y H:i" }}</span>
-                <span class="edited-line">
-                    {% if post.updated_at != post.created_at %}
-                    {% translate 'post.edited_prefix' %} {{ post.updated_at|date:"d.m.Y H:i" }}
-                    {% endif %}
-                </span>
+            <div id="toc-wrapper">
+                <div id="toc-list" role="list">
+                </div>
             </div>
 
-            <div id="post-content-view" class="content">
-                {{ html_content|safe }}
-            </div>
-        </article>
-
-        <div class="post-actions">
-            {% if can_edit %}
-                <button id="edit-button" class="action-btn edit-btn">{% translate 'post.edit' %}</button>
-            {% endif %}
-            <a href="{% url 'post_pdf' slug=post.slug %}" class="action-btn pdf-btn" target="_blank" rel="noopener noreferrer">
-                {% translate 'post.download_pdf' %}
-            </a>
+            <button id="scroll-bottom-btn" class="nav-arrow" title="Вниз" aria-label="Вниз">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
         </div>
+
+        <div id="viewer-container">
+            <article>
+                <h1 id="post-title-view">{{ post.title }}</h1>
+
+                <div class="post-meta">
+                    <span class="created-at">{{ post.created_at|date:"d.m.Y H:i" }}</span>
+                    <span class="edited-line">
+                        {% if post.updated_at != post.created_at %}
+                        {% translate 'post.edited_prefix' %} {{ post.updated_at|date:"d.m.Y H:i" }}
+                        {% endif %}
+                    </span>
+                </div>
+
+                <div id="post-content-view" class="content">
+                    {{ html_content|safe }}
+                </div>
+            </article>
+
+            <div class="post-actions">
+                {% if can_edit %}
+                    <button id="edit-button" class="action-btn edit-btn">{% translate 'post.edit' %}</button>
+                {% endif %}
+                <a href="{% url 'post_pdf' slug=post.slug %}" class="action-btn pdf-btn" target="_blank" rel="noopener noreferrer">
+                    {% translate 'post.download_pdf' %}
+                </a>
+            </div>
+        </div>
+
+        <div id="editor-container">
+            <form
+                id="edit-form"
+                data-slug="{{ post.slug }}"
+                data-original-title="{{ post.title }}"
+            >
+                {% csrf_token %}
+
+                <div class="edit-form-group">
+                    <input
+                        type="text"
+                        id="edit-title"
+                        name="title"
+                        class="edit-input"
+                        placeholder="Title"
+                        value="{{ post.title }}"
+                    >
+                </div>
+
+                <div class="edit-form-group">
+                    <textarea
+                        id="edit-content"
+                        name="content"
+                        class="edit-textarea"
+                        rows="15"
+                        placeholder="Content"
+                    >{{ post.content }}</textarea>
+                </div>
+
+                <div class="edit-actions">
+                    <button
+                        type="submit"
+                        id="publish-button"
+                        class="save-btn"
+                    >
+                        {% translate 'post.save' %}
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancel-button"
+                        class="cancel-btn"
+                    >
+                        {% translate 'post.cancel' %}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <p class="back-link">
+            <a href="{% url 'post_create' %}">
+                {% translate 'post.create_new' %}
+            </a>
+        </p>
     </div>
-
-    <div id="editor-container">
-        <form
-            id="edit-form"
-            data-slug="{{ post.slug }}"
-            data-original-title="{{ post.title }}"
-        >
-            {% csrf_token %}
-
-            <div class="edit-form-group">
-                <input
-                    type="text"
-                    id="edit-title"
-                    name="title"
-                    class="edit-input"
-                    placeholder="Title"
-                    value="{{ post.title }}"
-                >
-            </div>
-
-            <div class="edit-form-group">
-                <textarea
-                    id="edit-content"
-                    name="content"
-                    class="edit-textarea"
-                    rows="15"
-                    placeholder="Content"
-                >{{ post.content }}</textarea>
-            </div>
-
-            <div class="edit-actions">
-                <button
-                    type="submit"
-                    id="publish-button"
-                    class="save-btn"
-                >
-                    {% translate 'post.save' %}
-                </button>
-
-                <button
-                    type="button"
-                    id="cancel-button"
-                    class="cancel-btn"
-                >
-                    {% translate 'post.cancel' %}
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <p class="back-link">
-        <a href="{% url 'post_create' %}">
-            {% translate 'post.create_new' %}
-        </a>
-    </p>
 {% endblock %}
