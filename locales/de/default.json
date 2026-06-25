@@ -38,5 +38,10 @@
     "server_error": "Serverfehler.",
     "network_error": "Netzwerkfehler.",
     "failed_create": "Beitrag konnte nicht erstellt werden."
+  },
+  "nav": {
+    "scroll_top": "Nach oben scrollen",
+    "scroll_bottom": "Nach unten scrollen",
+    "page_navigation": "Seitennavigation"
   }
 }

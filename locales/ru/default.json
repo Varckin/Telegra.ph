@@ -38,5 +38,10 @@
     "server_error": "Ошибка сервера.",
     "network_error": "Ошибка сети.",
     "failed_create": "Не удалось создать пост."
+  },
+  "nav": {
+    "scroll_top": "Наверх",
+    "scroll_bottom": "Вниз",
+    "page_navigation": "Навигация по странице"
   }
 }

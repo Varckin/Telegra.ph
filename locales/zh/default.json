@@ -38,5 +38,10 @@
     "server_error": "服务器错误。",
     "network_error": "网络错误。",
     "failed_create": "创建帖子失败。"
+  },
+  "nav": {
+    "scroll_top": "向上滚动",
+    "scroll_bottom": "向下滚动",
+    "page_navigation": "页面导航"
   }
 }

@@ -38,5 +38,10 @@
     "server_error": "Error del servidor.",
     "network_error": "Error de red.",
     "failed_create": "Error al crear el post."
+  },
+  "nav": {
+    "scroll_top": "Desplazarse hacia arriba",
+    "scroll_bottom": "Desplazarse hacia abajo",
+    "page_navigation": "Navegación de página"
   }
 }

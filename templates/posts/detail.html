@@ -20,8 +20,8 @@
 
 {% block content %}
     <div class="container">
-        <div id="nav-sidebar" role="navigation" aria-label="Page navigation">
-            <button id="scroll-top-btn" class="nav-arrow" title="Наверх" aria-label="Наверх">
+        <div id="nav-sidebar" role="navigation" aria-label="{% translate 'nav.page_navigation' %}">
+            <button id="scroll-top-btn" class="nav-arrow" title="{% translate 'nav.scroll_top' %}" aria-label="{% translate 'nav.scroll_top' %}">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="18 15 12 9 6 15"></polyline>
                 </svg>
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <button id="scroll-bottom-btn" class="nav-arrow" title="Вниз" aria-label="Вниз">
+            <button id="scroll-bottom-btn" class="nav-arrow" title="{% translate 'nav.scroll_bottom' %}" aria-label="{% translate 'nav.scroll_bottom' %}">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>

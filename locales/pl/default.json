@@ -38,5 +38,10 @@
     "server_error": "Błąd serwera.",
     "network_error": "Błąd sieci.",
     "failed_create": "Nie udało się utworzyć posta."
+  },
+  "nav": {
+    "scroll_top": "Przewiń do góry",
+    "scroll_bottom": "Przewiń na dół",
+    "page_navigation": "Nawigacja strony"
   }
 }

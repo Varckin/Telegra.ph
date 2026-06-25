@@ -38,5 +38,10 @@
     "server_error": "Erreur serveur.",
     "network_error": "Erreur réseau.",
     "failed_create": "Échec de la création de la publication."
+  },
+  "nav": {
+    "scroll_top": "Faire défiler vers le haut",
+    "scroll_bottom": "Faire défiler vers le bas",
+    "page_navigation": "Navigation de la page"
   }
 }
