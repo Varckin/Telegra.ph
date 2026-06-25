@@ -6,7 +6,7 @@
     z-index: 900;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
     background: rgba(26, 26, 26, 0.85);
     backdrop-filter: blur(16px);
@@ -17,16 +17,27 @@
     max-height: min(85vh, 700px);
     width: 76px;
     box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                padding 0.4s ease,
+                box-shadow 0.4s ease,
+                opacity 0.3s ease,
+                transform 0.3s ease;
     opacity: 0;
     transform: translateY(-50%) scale(0.95);
     pointer-events: none;
+    overflow: hidden;
 }
 
 #nav-sidebar.visible {
     opacity: 1;
     transform: translateY(-50%) scale(1);
     pointer-events: auto;
+}
+
+#nav-sidebar:hover {
+    width: 320px;
+    padding: 20px 18px;
+    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.8);
 }
 
 .nav-arrow {
@@ -43,6 +54,7 @@
     width: 52px;
     height: 52px;
     flex-shrink: 0;
+    margin-bottom: 2px;
 }
 
 .nav-arrow:hover {
@@ -80,6 +92,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    width: 100%;
 }
 
 #toc-list::-webkit-scrollbar {
@@ -111,6 +124,7 @@
     font-weight: 400;
     letter-spacing: 0.02em;
     border-left: 3px solid transparent;
+    max-width: 100%;
 }
 
 .toc-item:hover {
@@ -130,15 +144,18 @@
     padding-left: 10px;
     font-weight: 600;
 }
+
 .toc-item.level-2 {
     padding-left: 26px;
     font-size: 14px;
 }
+
 .toc-item.level-3 {
     padding-left: 42px;
     font-size: 13px;
     opacity: 0.85;
 }
+
 .toc-item.level-4 {
     padding-left: 58px;
     font-size: 12px;
@@ -152,6 +169,10 @@
         width: 64px;
         border-radius: 20px;
         gap: 10px;
+    }
+    #nav-sidebar:hover {
+        width: 280px;
+        padding: 16px 14px;
     }
     .nav-arrow {
         width: 44px;
@@ -190,6 +211,10 @@
         width: 54px;
         border-radius: 16px;
         gap: 8px;
+    }
+    #nav-sidebar:hover {
+        width: 240px;
+        padding: 12px 12px;
     }
     .nav-arrow {
         width: 38px;
@@ -230,6 +255,10 @@
         border-radius: 14px;
         gap: 6px;
     }
+    #nav-sidebar:hover {
+        width: 200px;
+        padding: 8px 10px;
+    }
     .nav-arrow {
         width: 32px;
         height: 32px;
@@ -265,6 +294,7 @@
 #toc-list:empty {
     display: none;
 }
+
 #toc-list:empty ~ #toc-wrapper {
     display: none;
 }
@@ -275,12 +305,10 @@
     }
 }
 
-#nav-sidebar {
-    transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease;
-}
 #nav-sidebar.scrolled {
     opacity: 0.6;
 }
+
 #nav-sidebar.scrolled:hover {
     opacity: 1;
 }
