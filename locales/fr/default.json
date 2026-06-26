@@ -42,6 +42,13 @@
   "nav": {
     "scroll_top": "Faire défiler vers le haut",
     "scroll_bottom": "Faire défiler vers le bas",
-    "page_navigation": "Navigation de la page"
+    "page_navigation": "Navigation de la page",
+    "pin": "Épingler le panneau",
+    "unpin": "Détacher le panneau"
+  },
+  "reading_time": {
+    "less_than_minute": "<1 min",
+    "one_minute": "1 min",
+    "minutes": "min"
   }
 }

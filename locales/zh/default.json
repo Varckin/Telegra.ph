@@ -42,6 +42,13 @@
   "nav": {
     "scroll_top": "向上滚动",
     "scroll_bottom": "向下滚动",
-    "page_navigation": "页面导航"
+    "page_navigation": "页面导航",
+    "pin": "固定面板",
+    "unpin": "取消固定面板"
+  },
+  "reading_time": {
+    "less_than_minute": "<1 分钟",
+    "one_minute": "1 分钟",
+    "minutes": "分钟"
   }
 }

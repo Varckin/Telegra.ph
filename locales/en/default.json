@@ -42,6 +42,13 @@
   "nav": {
     "scroll_top": "Scroll to top",
     "scroll_bottom": "Scroll to bottom",
-    "page_navigation": "Page navigation"
+    "page_navigation": "Page navigation",
+    "pin": "Pin panel",
+    "unpin": "Unpin panel"
+  },
+  "reading_time": {
+    "less_than_minute": "<1 min",
+    "one_minute": "1 min",
+    "minutes": "min"
   }
 }

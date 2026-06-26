@@ -42,6 +42,13 @@
   "nav": {
     "scroll_top": "Наверх",
     "scroll_bottom": "Вниз",
-    "page_navigation": "Навигация по странице"
+    "page_navigation": "Навигация по странице",
+    "pin": "Закрепить панель",
+    "unpin": "Открепить панель"
+  },
+  "reading_time": {
+    "less_than_minute": "<1 мин",
+    "one_minute": "1 мин",
+    "minutes": "мин"
   }
 }

@@ -42,6 +42,13 @@
   "nav": {
     "scroll_top": "Desplazarse hacia arriba",
     "scroll_bottom": "Desplazarse hacia abajo",
-    "page_navigation": "Navegación de página"
+    "page_navigation": "Navegación de página",
+    "pin": "Fijar panel",
+    "unpin": "Desfijar panel"
+  },
+  "reading_time": {
+    "less_than_minute": "<1 min",
+    "one_minute": "1 min",
+    "minutes": "min"
   }
 }

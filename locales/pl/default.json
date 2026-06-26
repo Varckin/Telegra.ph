@@ -42,6 +42,13 @@
   "nav": {
     "scroll_top": "Przewiń do góry",
     "scroll_bottom": "Przewiń na dół",
-    "page_navigation": "Nawigacja strony"
+    "page_navigation": "Nawigacja strony",
+    "pin": "Przypnij panel",
+    "unpin": "Odepnij panel"
+  },
+  "reading_time": {
+    "less_than_minute": "<1 min",
+    "one_minute": "1 min",
+    "minutes": "min"
   }
 }

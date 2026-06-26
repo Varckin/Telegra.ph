@@ -5,6 +5,18 @@
     const tocList = document.getElementById('toc-list');
     const topBtn = document.getElementById('scroll-top-btn');
     const bottomBtn = document.getElementById('scroll-bottom-btn');
+    const pinBtn = document.getElementById('pin-btn');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const readingTimeEl = document.getElementById('reading-time');
+
+    const lessThanOne = window.i18n.lessThanOne;
+    const oneMinute = window.i18n.oneMinute;
+    const minutesFormat = window.i18n.minutesFormat;
+    const pinText = window.i18n.pin;
+    const unpinText = window.i18n.unpin;
+
+    let expandTimer = null;
 
     function slugify(text) {
         return text
@@ -141,6 +153,55 @@
         setTimeout(updateActiveTOC, 100);
     }
 
+    function updateReadingProgress() {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (scrollHeight <= 0) {
+            progressFill.style.width = '0%';
+            progressText.textContent = '0%';
+            return;
+        }
+        const scrolled = window.pageYOffset;
+        const percent = Math.min(100, (scrolled / scrollHeight) * 100);
+        const rounded = Math.round(percent);
+        progressFill.style.width = percent + '%';
+        progressText.textContent = rounded + '%';
+    }
+
+    function updateReadingTime() {
+        const contentView = document.getElementById('post-content-view');
+        if (!contentView) {
+            readingTimeEl.textContent = '–';
+            return;
+        }
+        const text = contentView.textContent || '';
+        const words = text.split(/\s+/).filter(w => w.length > 0).length;
+        const wordsPerMinute = 200;
+        const minutes = Math.ceil(words / wordsPerMinute);
+        let display;
+        if (minutes < 1) {
+            display = lessThanOne;
+        } else if (minutes === 1) {
+            display = oneMinute;
+        } else {
+            display = minutes + ' ' + minutesFormat;
+        }
+        readingTimeEl.textContent = display;
+    }
+
+    function updateAll() {
+        updateReadingProgress();
+        updateReadingTime();
+    }
+
+    let scrollTimeout = null;
+    function throttledScrollUpdate() {
+        if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+        scrollTimeout = requestAnimationFrame(() => {
+            updateReadingProgress();
+            scrollTimeout = null;
+        });
+    }
+
     function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -150,8 +211,43 @@
         window.scrollTo({ top: bottom, behavior: 'smooth' });
     }
 
+    function togglePin() {
+        sidebar.classList.toggle('pinned');
+        if (sidebar.classList.contains('pinned')) {
+            pinBtn.classList.add('active');
+            pinBtn.setAttribute('aria-label', unpinText);
+            pinBtn.setAttribute('title', unpinText);
+            clearTimeout(expandTimer);
+            sidebar.classList.remove('expanded');
+        } else {
+            pinBtn.classList.remove('active');
+            pinBtn.setAttribute('aria-label', pinText);
+            pinBtn.setAttribute('title', pinText);
+        }
+    }
+
+    function handleMouseEnter() {
+        if (sidebar.classList.contains('pinned')) return;
+        clearTimeout(expandTimer);
+        expandTimer = setTimeout(() => {
+            sidebar.classList.add('expanded');
+            expandTimer = null;
+        }, 2500);
+    }
+
+    function handleMouseLeave() {
+        if (sidebar.classList.contains('pinned')) return;
+        clearTimeout(expandTimer);
+        expandTimer = null;
+        sidebar.classList.remove('expanded');
+    }
+
     if (topBtn) topBtn.addEventListener('click', scrollToTop);
     if (bottomBtn) bottomBtn.addEventListener('click', scrollToBottom);
+    if (pinBtn) pinBtn.addEventListener('click', togglePin);
+
+    sidebar.addEventListener('mouseenter', handleMouseEnter);
+    sidebar.addEventListener('mouseleave', handleMouseLeave);
 
     document.addEventListener('keydown', function(e) {
         if ((e.ctrlKey && e.key === 'ArrowUp') || (e.key === 'Home' && !e.ctrlKey && !e.metaKey)) {
@@ -165,9 +261,17 @@
     });
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', buildTOC);
+        document.addEventListener('DOMContentLoaded', function() {
+            buildTOC();
+            updateAll();
+            window.addEventListener('scroll', throttledScrollUpdate, { passive: true });
+        });
     } else {
-        setTimeout(buildTOC, 100);
+        setTimeout(function() {
+            buildTOC();
+            updateAll();
+            window.addEventListener('scroll', throttledScrollUpdate, { passive: true });
+        }, 100);
     }
 
     const observer = new MutationObserver(function() {
@@ -178,6 +282,7 @@
                 tocList.innerHTML = '';
                 sidebar.classList.remove('visible');
                 buildTOC();
+                updateAll();
             }
         }, 500);
     });
@@ -194,6 +299,9 @@
     document.addEventListener('postContentUpdated', function() {
         tocList.innerHTML = '';
         sidebar.classList.remove('visible');
-        setTimeout(buildTOC, 150);
+        setTimeout(function() {
+            buildTOC();
+            updateAll();
+        }, 150);
     });
 })();
