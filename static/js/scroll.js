@@ -2,7 +2,7 @@
     'use strict';
 
     const sidebar = document.getElementById('nav-sidebar');
-    const tocList = document.getElementById('toc-list');
+    const tocList = document.getElementById('toc-wrapper').querySelector('.ds-virtual-list-visible-items');
     const topBtn = document.getElementById('scroll-top-btn');
     const bottomBtn = document.getElementById('scroll-bottom-btn');
     const pinBtn = document.getElementById('pin-btn');
@@ -17,6 +17,27 @@
     const unpinText = window.i18n.unpin;
 
     let expandTimer = null;
+    let isScrollingToHeading = false;
+    let tocItems = [];
+    let scrollRaf = null;
+
+    document.querySelectorAll('.nav-arrow').forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            clearTimeout(expandTimer);
+            expandTimer = null;
+        });
+    });
+
+    function showSidebar() {
+        sidebar.classList.add('visible');
+    }
+
+    function hideSidebar() {
+        sidebar.classList.remove('visible');
+        if (!sidebar.classList.contains('pinned')) {
+            sidebar.classList.remove('expanded');
+        }
+    }
 
     function slugify(text) {
         return text
@@ -39,6 +60,7 @@
         const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
         if (headings.length === 0) {
             sidebar.classList.remove('visible');
+            tocItems = [];
             return;
         }
 
@@ -71,21 +93,36 @@
 
         if (items.length === 0) {
             sidebar.classList.remove('visible');
+            tocItems = [];
             return;
         }
 
+        tocItems = items;
+
         tocList.innerHTML = '';
         items.forEach((item) => {
-            const li = document.createElement('div');
-            li.role = 'listitem';
-            li.className = `toc-item level-${item.level}`;
-            li.textContent = item.text;
-            li.dataset.targetId = item.id;
+            const itemDiv = document.createElement('div');
+            itemDiv.className = '_81e7b5e level-' + item.level;
+            itemDiv.dataset.targetId = item.id;
 
-            li.addEventListener('click', function(e) {
+            const textDiv = document.createElement('div');
+            textDiv.className = '_72b6158';
+            textDiv.textContent = item.text;
+
+            const extraDiv = document.createElement('div');
+            extraDiv.className = 'ef46fbc6';
+            const dotDiv = document.createElement('div');
+            dotDiv.className = 'fae5876e';
+            extraDiv.appendChild(dotDiv);
+
+            itemDiv.appendChild(textDiv);
+            itemDiv.appendChild(extraDiv);
+
+            itemDiv.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.getElementById(this.dataset.targetId);
                 if (target) {
+                    isScrollingToHeading = true;
                     const topOffset = 20;
                     const targetRect = target.getBoundingClientRect();
                     const absoluteTop = window.pageYOffset + targetRect.top - topOffset;
@@ -94,45 +131,55 @@
                         behavior: 'smooth'
                     });
 
-                    document.querySelectorAll('.toc-item').forEach(el => el.classList.remove('active'));
-                    this.classList.add('active');
+                    document.querySelectorAll('._81e7b5e').forEach(el => el.classList.remove('_19d617c'));
+                    this.classList.add('_19d617c');
+
+                    setTimeout(() => {
+                        isScrollingToHeading = false;
+                    }, 500);
                 }
             });
 
-            tocList.appendChild(li);
+            tocList.appendChild(itemDiv);
         });
 
         requestAnimationFrame(() => {
             sidebar.classList.add('visible');
         });
 
-        let activeTimeout = null;
-        function updateActiveTOC() {
-            const scrollY = window.pageYOffset + 120;
-            let activeIndex = -1;
+        setTimeout(updateActiveTOC, 100);
+    }
 
-            items.forEach((item, index) => {
-                const el = item.element;
-                if (!el) return;
-                const rect = el.getBoundingClientRect();
-                const top = rect.top + window.pageYOffset;
-                if (top <= scrollY) {
-                    activeIndex = index;
-                }
-            });
+    function updateActiveTOC() {
+        if (isScrollingToHeading) return;
+        if (tocItems.length === 0) return;
 
-            const tocItems = tocList.querySelectorAll('.toc-item');
-            tocItems.forEach((el, idx) => {
-                if (idx === activeIndex) {
-                    el.classList.add('active');
-                } else {
-                    el.classList.remove('active');
-                }
-            });
+        const scrollY = window.pageYOffset + 120;
+        let activeIndex = -1;
 
-            if (activeIndex >= 0 && tocItems[activeIndex]) {
-                const activeEl = tocItems[activeIndex];
-                const container = tocList;
+        tocItems.forEach((item, index) => {
+            const el = item.element;
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const top = rect.top + window.pageYOffset;
+            if (top <= scrollY) {
+                activeIndex = index;
+            }
+        });
+
+        const tocItemElements = tocList.querySelectorAll('._81e7b5e');
+        tocItemElements.forEach((el, idx) => {
+            if (idx === activeIndex) {
+                el.classList.add('_19d617c');
+            } else {
+                el.classList.remove('_19d617c');
+            }
+        });
+
+        if (activeIndex >= 0 && tocItemElements[activeIndex]) {
+            const activeEl = tocItemElements[activeIndex];
+            const container = tocList.closest('.ds-virtual-list');
+            if (container) {
                 const containerRect = container.getBoundingClientRect();
                 const itemRect = activeEl.getBoundingClientRect();
                 if (itemRect.top < containerRect.top || itemRect.bottom > containerRect.bottom) {
@@ -140,17 +187,6 @@
                 }
             }
         }
-
-        function throttledUpdate() {
-            if (activeTimeout) cancelAnimationFrame(activeTimeout);
-            activeTimeout = requestAnimationFrame(() => {
-                updateActiveTOC();
-                activeTimeout = null;
-            });
-        }
-
-        window.addEventListener('scroll', throttledUpdate, { passive: true });
-        setTimeout(updateActiveTOC, 100);
     }
 
     function updateReadingProgress() {
@@ -188,17 +224,12 @@
         readingTimeEl.textContent = display;
     }
 
-    function updateAll() {
-        updateReadingProgress();
-        updateReadingTime();
-    }
-
-    let scrollTimeout = null;
-    function throttledScrollUpdate() {
-        if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
-        scrollTimeout = requestAnimationFrame(() => {
+    function handleScroll() {
+        if (scrollRaf) cancelAnimationFrame(scrollRaf);
+        scrollRaf = requestAnimationFrame(() => {
             updateReadingProgress();
-            scrollTimeout = null;
+            updateActiveTOC();
+            scrollRaf = null;
         });
     }
 
@@ -226,17 +257,19 @@
         }
     }
 
-    function handleMouseEnter() {
+    function handleMouseEnter(e) {
         if (sidebar.classList.contains('pinned')) return;
+        if (e.target.closest('.nav-arrow')) return;
         clearTimeout(expandTimer);
         expandTimer = setTimeout(() => {
             sidebar.classList.add('expanded');
             expandTimer = null;
-        }, 2500);
+        }, 500);
     }
 
-    function handleMouseLeave() {
+    function handleMouseLeave(e) {
         if (sidebar.classList.contains('pinned')) return;
+        if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('#nav-sidebar')) return;
         clearTimeout(expandTimer);
         expandTimer = null;
         sidebar.classList.remove('expanded');
@@ -260,17 +293,43 @@
         }
     });
 
+    const editBtn = document.getElementById('edit-button');
+    const cancelBtn = document.getElementById('cancel-button');
+
+    if (editBtn) {
+        editBtn.addEventListener('click', hideSidebar);
+    }
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            showSidebar();
+        });
+    }
+
+    document.addEventListener('postContentUpdated', function() {
+        tocList.innerHTML = '';
+        sidebar.classList.remove('visible');
+        setTimeout(function() {
+            buildTOC();
+            updateReadingTime();
+            updateReadingProgress();
+            showSidebar();
+        }, 150);
+    });
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
             buildTOC();
-            updateAll();
-            window.addEventListener('scroll', throttledScrollUpdate, { passive: true });
+            updateReadingTime();
+            updateReadingProgress();
+            window.addEventListener('scroll', handleScroll, { passive: true });
         });
     } else {
         setTimeout(function() {
             buildTOC();
-            updateAll();
-            window.addEventListener('scroll', throttledScrollUpdate, { passive: true });
+            updateReadingTime();
+            updateReadingProgress();
+            window.addEventListener('scroll', handleScroll, { passive: true });
         }, 100);
     }
 
@@ -282,7 +341,8 @@
                 tocList.innerHTML = '';
                 sidebar.classList.remove('visible');
                 buildTOC();
-                updateAll();
+                updateReadingTime();
+                updateReadingProgress();
             }
         }, 500);
     });
@@ -295,13 +355,4 @@
             characterData: true
         });
     }
-
-    document.addEventListener('postContentUpdated', function() {
-        tocList.innerHTML = '';
-        sidebar.classList.remove('visible');
-        setTimeout(function() {
-            buildTOC();
-            updateAll();
-        }, 150);
-    });
 })();

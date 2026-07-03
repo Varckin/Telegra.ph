@@ -25,17 +25,20 @@ DEBUG = getenv("DEBUG", "False").lower() in ("true")
 
 # Application definition
 
-INSTALLED_APPS = [
+BASE_APPS = [
     'locale_i18n',
     'posts',
-    'pdf_generator',
-    'visitor_tracking',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
+]
+
+PROD_APPS = [
+    'pdf_generator',
+    'visitor_tracking'
 ]
 
 MIDDLEWARE = [
@@ -78,6 +81,9 @@ if DEBUG:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+    INSTALLED_APPS = BASE_APPS
+
 else:
     ALLOWED_HOSTS = getenv("ALLOWED_HOSTS", "").split(",")
     CSRF_TRUSTED_ORIGINS = getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
@@ -89,6 +95,8 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+    INSTALLED_APPS = BASE_APPS + PROD_APPS
 
 
 # Password validation
