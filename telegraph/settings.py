@@ -28,6 +28,7 @@ DEBUG = getenv("DEBUG", "False").lower() in ("true")
 BASE_APPS = [
     'locale_i18n',
     'posts',
+    'sitemapv1',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

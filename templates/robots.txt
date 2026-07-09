@@ -3,3 +3,5 @@ User-agent: *
 Disallow: /xyz/
 
 Allow: /
+
+Sitemap: https://telegraph.varckin.xyz/sitemap.xml

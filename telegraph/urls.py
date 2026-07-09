@@ -9,6 +9,7 @@ urlpatterns = [
     path('xyz/', admin.site.urls),
     path('', include('posts.urls')),
     path('', include('pdf_generator.urls')),
+    path('sitemap.xml', include('sitemapv1.urls')),
     path("robots.txt", robots_txt)
 ]
 
