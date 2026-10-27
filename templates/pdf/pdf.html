@@ -1,38 +1,58 @@
-{% load static %}
+{% load locale_tags %}
 <!DOCTYPE html>
-<html>
+<html lang="{{ request.locale|default:'en' }}">
 <head>
     <meta charset="UTF-8">
     <title>{{ post.title }}</title>
 </head>
 <body>
-    <div class="footer">
-        {% if logo_url %}
-            <img src="{{ logo_url }}" class="logo" alt="Logo">
-        {% endif %}
-
-        <a href="{% url 'post_create' %}" target="_blank" rel="noopener noreferrer">
-            {{ site_name }}
-        </a>
+    <div class="pdf-footer">
+        <span class="pdf-footer-brand">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M13.5 2 4.8 13.4h5.6L9.9 22l9.3-12h-6.2l.5-8z"/>
+            </svg>
+            <span>{% translate 'site.title' %}</span>
+        </span>
     </div>
 
-    <div class="content-wrapper">
+    <header class="pdf-header">
+        <div class="pdf-brand">
+            <span class="pdf-brand-logo">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M13.5 2 4.8 13.4h5.6L9.9 22l9.3-12h-6.2l.5-8z"/>
+                </svg>
+            </span>
+            <span class="pdf-brand-name">{% translate 'site.title' %}</span>
+        </div>
 
-        <h1 class="post-title">
-            {{ post.title }}
-        </h1>
+        <h1 class="pdf-title">{{ post.title }}</h1>
 
-        <div class="meta">
-            Published: {{ post.created_at|date:"d.m.Y H:i" }}
-
+        <div class="pdf-meta">
+            <span class="pdf-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <path d="M16 2v4"/>
+                    <path d="M8 2v4"/>
+                    <path d="M3 10h18"/>
+                </svg>
+                <span>{{ post.created_at|date:"d.m.Y H:i" }}</span>
+            </span>
             {% if post.updated_at != post.created_at %}
-                &nbsp;| Updated: {{ post.updated_at|date:"d.m.Y H:i" }}
+            <span class="pdf-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                    <path d="m15 5 4 4"/>
+                </svg>
+                <span>{% translate 'post.edited_prefix' %} {{ post.updated_at|date:"d.m.Y H:i" }}</span>
+            </span>
             {% endif %}
         </div>
 
-        <div class="content">
-            {{ content_html|safe }}
-        </div>
-    </div>
+        <div class="pdf-rule"></div>
+    </header>
+
+    <article class="content">
+        {{ content_html|safe }}
+    </article>
 </body>
 </html>

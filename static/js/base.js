@@ -178,7 +178,7 @@
             status: false,
             minHeight: '420px',
             renderingConfig: {
-                singleLineBreaks: false,
+                singleLineBreaks: true,
                 codeSyntaxHighlighting: true
             },
             toolbar: [

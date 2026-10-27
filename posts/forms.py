@@ -4,6 +4,17 @@ from posts.constants import CONSTANTS
 
 
 class PostForm(forms.ModelForm):
+    content = forms.CharField(
+        strip=False,
+        widget=forms.Textarea(
+            attrs={
+                "class": "telegraph-textarea",
+                "placeholder": "Your story...",
+                "rows": 12,
+            }
+        ),
+    )
+
     class Meta:
         model = Post
         fields = ["title", "content",]
@@ -13,13 +24,6 @@ class PostForm(forms.ModelForm):
                     "class": "telegraph-input",
                     "placeholder": "Title",
                     "autofocus": True,
-                }
-            ),
-            "content": forms.Textarea(
-                attrs={
-                    "class": "telegraph-textarea",
-                    "placeholder": "Your story...",
-                    "rows": 12,
                 }
             ),
         }
