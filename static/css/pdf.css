@@ -66,6 +66,7 @@ body {
 
 .pdf-header {
     margin-bottom: 14pt;
+    page-break-inside: avoid;
 }
 
 .pdf-brand {
@@ -224,6 +225,8 @@ body {
 
 .content li {
     margin-bottom: 2.5pt;
+    orphans: 2;
+    widows: 2;
 }
 
 .content li::marker {
@@ -245,7 +248,9 @@ body {
     border-radius: 0 5pt 5pt 0;
     background: #f6f8fc;
     color: #4b5563;
-    page-break-inside: avoid;
+    page-break-inside: auto;
+    orphans: 2;
+    widows: 2;
 }
 
 .content blockquote p:last-child {
@@ -274,7 +279,9 @@ body {
     color: #24292f;
     white-space: pre-wrap;
     word-wrap: break-word;
-    page-break-inside: avoid;
+    page-break-inside: auto;
+    orphans: 2;
+    widows: 2;
 }
 
 .content pre code {
@@ -410,6 +417,8 @@ body {
 
 .content img {
     max-width: 100%;
+    max-height: 250mm;
+    width: auto;
     height: auto;
     border-radius: 5pt;
     border: 0.7pt solid #e5e7eb;
@@ -438,6 +447,7 @@ body {
     height: 0.8pt;
     margin: 12pt 0;
     background: linear-gradient(90deg, transparent, #cbd5e1 22%, #cbd5e1 78%, transparent);
+    page-break-after: avoid;
 }
 
 .content kbd {
@@ -479,6 +489,11 @@ body {
     font-weight: 600;
     color: #111827;
     background: #f8fafc;
+    page-break-after: avoid;
+}
+
+.content details {
+    page-break-inside: auto;
 }
 
 .content details > :not(summary) {
