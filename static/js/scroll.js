@@ -314,6 +314,20 @@
         return String(raw || '').replace(/\n$/, '');
     }
 
+    function enhanceTables() {
+        var tables = contentView.querySelectorAll('table');
+        tables.forEach(function (table) {
+            var parent = table.parentElement;
+            if (parent && parent.classList.contains('table-scroll')) {
+                return;
+            }
+            var wrap = document.createElement('div');
+            wrap.className = 'table-scroll';
+            table.parentNode.insertBefore(wrap, table);
+            wrap.appendChild(table);
+        });
+    }
+
     function enhanceCodeBlocks() {
         var pres = contentView.querySelectorAll('pre');
         pres.forEach(function (pre) {
@@ -470,6 +484,7 @@
             if (isEditing()) {
                 return;
             }
+            enhanceTables();
             enhanceCodeBlocks();
             updateReadingTime();
             if (tocList.childElementCount > 0 && getContentSignature() === lastSignature) {
@@ -555,6 +570,7 @@
     document.addEventListener('postContentUpdated', function () {
         scheduleRebuild();
         setTimeout(function () {
+            enhanceTables();
             enhanceCodeBlocks();
             initReveal();
             scheduleOffsetRefresh();
@@ -585,6 +601,7 @@
         buildTOC();
         updateReadingTime();
         updateProgress();
+        enhanceTables();
         enhanceCodeBlocks();
         initReveal();
         observeContent();

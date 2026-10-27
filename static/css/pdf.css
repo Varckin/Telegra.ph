@@ -9,7 +9,7 @@
 
     @bottom-right {
         content: counter(page) " / " counter(pages);
-        font-family: "Inter", "DejaVu Sans", "Helvetica", "Arial", sans-serif;
+        font-family: "Inter", "DejaVu Sans", "Noto Sans", "Helvetica", "Arial", sans-serif;
         font-size: 8.5pt;
         color: #9aa3b5;
         vertical-align: top;
@@ -18,7 +18,7 @@
 }
 
 body {
-    font-family: "Inter", "DejaVu Sans", "Helvetica", "Arial", sans-serif;
+    font-family: "Inter", "DejaVu Sans", "Noto Sans", "Helvetica", "Arial", sans-serif;
     font-size: 10.5pt;
     line-height: 1.65;
     color: #1f2430;
@@ -94,16 +94,12 @@ body {
 }
 
 .pdf-meta {
-    display: flex;
-    align-items: center;
-    gap: 14pt;
     margin-bottom: 10pt;
 }
 
 .pdf-meta-item {
-    display: flex;
-    align-items: center;
-    gap: 4pt;
+    display: inline-block;
+    margin-right: 14pt;
     font-size: 8.8pt;
     color: #6b7280;
     white-space: nowrap;
@@ -112,7 +108,8 @@ body {
 .pdf-meta-item svg {
     width: 9.5pt;
     height: 9.5pt;
-    stroke: #8a94a6;
+    margin-right: 4pt;
+    vertical-align: -1pt;
 }
 
 .pdf-rule {
@@ -242,7 +239,7 @@ body {
 }
 
 .content :not(pre) > code {
-    font-family: "JetBrains Mono", "DejaVu Sans Mono", "Courier New", monospace;
+    font-family: "JetBrains Mono", "DejaVu Sans Mono", "Noto Sans Mono", "Courier New", monospace;
     font-size: 8.8pt;
     background: #eef2f9;
     border: 0.6pt solid #d8e0ea;
@@ -257,7 +254,7 @@ body {
     border-radius: 5pt;
     padding: 8pt 10pt;
     margin: 9pt 0;
-    font-family: "JetBrains Mono", "DejaVu Sans Mono", "Courier New", monospace;
+    font-family: "JetBrains Mono", "DejaVu Sans Mono", "Noto Sans Mono", "Courier New", monospace;
     font-size: 8.4pt;
     line-height: 1.55;
     color: #24292f;
@@ -430,7 +427,7 @@ body {
 }
 
 .content kbd {
-    font-family: "JetBrains Mono", "DejaVu Sans Mono", "Courier New", monospace;
+    font-family: "JetBrains Mono", "DejaVu Sans Mono", "Noto Sans Mono", "Courier New", monospace;
     font-size: 8pt;
     background: #f3f4f6;
     border: 0.6pt solid #cbd5e1;
