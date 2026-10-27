@@ -31,9 +31,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcairo2 \
     libgdk-pixbuf-2.0-0 \
     shared-mime-info \
-    fonts-dejavu-core \
-    fonts-noto-core \
-    fonts-symbola \
     fonts-noto-color-emoji \
     && rm -rf /var/lib/apt/lists/*
 

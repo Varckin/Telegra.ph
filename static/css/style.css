@@ -980,12 +980,13 @@ body.page-post {
 }
 
 :is(.content, .editor-preview, .editor-preview-side) table {
-    width: 100%;
+    width: max-content;
+    max-width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    margin: 1.7rem 0;
+    margin: 1.7rem auto;
     font-size: 0.95rem;
 }
 
@@ -998,7 +999,7 @@ body.page-post {
 }
 
 .content .table-scroll > table {
-    margin: 0;
+    margin: 0 auto;
 }
 
 .content .table-scroll::-webkit-scrollbar {

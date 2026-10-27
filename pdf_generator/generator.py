@@ -13,6 +13,18 @@ from pdf_generator.config import SITE_NAME, CSS_PDF_PATH
 
 _css_cache: Optional[str] = None
 
+_PDF_GLYPH_MAP: dict[int, Optional[int]] = {
+    0x2705: 0x2714,
+    0x274C: 0x2716,
+    0x274E: 0x2718,
+    0x2B50: 0x2605,
+    0x2764: 0x2665,
+    0xFE0F: None,
+}
+
+def pdf_safe_text(html: str) -> str:
+    return html.translate(_PDF_GLYPH_MAP)
+
 def _get_css_string() -> str:
     """Load CSS content from file with caching."""
     global _css_cache
@@ -48,8 +60,8 @@ def post_to_pdf(post: Post, request: Optional[HttpRequest] = None) -> bytes:
 
     html_string: str = render_to_string('pdf/pdf.html', {
         'post': post,
-        'content_html': content_html,
-        'title': post.title,
+        'content_html': pdf_safe_text(content_html),
+        'title': pdf_safe_text(post.title),
         'site_name': SITE_NAME,
         'request': _get_render_request(request),
     })
@@ -57,6 +69,8 @@ def post_to_pdf(post: Post, request: Optional[HttpRequest] = None) -> bytes:
     base_url: Optional[str] = request.build_absolute_uri('/') if request else None
 
     html = HTML(string=html_string, base_url=base_url)
-    pdf_bytes: bytes = html.write_pdf(stylesheets=[CSS(string=_get_css_string())])
+    css_base_url: str = (settings.BASE_DIR / 'static' / 'css').as_uri() + '/'
+    pdf_bytes: bytes = html.write_pdf(
+        stylesheets=[CSS(string=_get_css_string(), base_url=css_base_url)])
 
     return pdf_bytes

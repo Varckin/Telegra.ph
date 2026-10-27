@@ -1,3 +1,17 @@
+@font-face {
+    font-family: "Noto Sans Symbols";
+    src: url("../fonts/NotoSansSymbols-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans Symbols 2";
+    src: url("../fonts/NotoSansSymbols2-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
 @page {
     size: A4;
     margin: 15mm 14mm 17mm 14mm;
@@ -9,7 +23,7 @@
 
     @bottom-right {
         content: counter(page) " / " counter(pages);
-        font-family: "Inter", "DejaVu Sans", "Noto Sans", "Helvetica", "Arial", sans-serif;
+        font-family: "Inter", "DejaVu Sans", "Noto Sans", "Noto Sans Symbols", "Noto Sans Symbols 2", "Helvetica", "Arial", sans-serif;
         font-size: 8.5pt;
         color: #9aa3b5;
         vertical-align: top;
@@ -18,7 +32,7 @@
 }
 
 body {
-    font-family: "Inter", "DejaVu Sans", "Noto Sans", "Helvetica", "Arial", sans-serif;
+    font-family: "Inter", "DejaVu Sans", "Noto Sans", "Noto Sans Symbols", "Noto Sans Symbols 2", "Helvetica", "Arial", sans-serif;
     font-size: 10.5pt;
     line-height: 1.65;
     color: #1f2430;
