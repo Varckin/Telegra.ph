@@ -19,12 +19,14 @@
     "invalid_form": "Ungültiges Formular.",
     "permission_denied": "Zugriff verweigert.",
     "validation_error": "Validierungsfehler.",
+    "rate_limited": "Zu viele Anfragen. Bitte versuchen Sie es später erneut.",
     "network_error": "Netzwerkfehler.",
     "title_too_long": "Titel ist zu lang.",
-    "edited_prefix": "· bearbeitet",
-    "create_new": "← Neuen Beitrag erstellen",
-    "back_home": "← Zurück zur Startseite",
-    "download_pdf": "PDF herunterladen"
+    "edited_prefix": "bearbeitet",
+    "create_new": "Neue Notiz erstellen",
+    "back_home": "Zurück zur Startseite",
+    "download_pdf": "PDF herunterladen",
+    "copy_link": "Link kopieren"
   },
   "error": {
     "page_not_found": "Seite nicht gefunden",
@@ -37,18 +39,33 @@
     "post_updated": "Beitrag aktualisiert.",
     "server_error": "Serverfehler.",
     "network_error": "Netzwerkfehler.",
-    "failed_create": "Beitrag konnte nicht erstellt werden."
+    "failed_create": "Beitrag konnte nicht erstellt werden.",
+    "publishing": "Wird veröffentlicht…",
+    "saving": "Wird gespeichert…",
+    "link_copied": "Link in die Zwischenablage kopiert",
+    "copy_failed": "Link konnte nicht kopiert werden.",
+    "copy_code": "Code kopieren",
+    "code_copied": "Kopiert!",
+    "click_to_copy_code": "Zum Kopieren klicken"
   },
   "nav": {
     "scroll_top": "Nach oben scrollen",
     "scroll_bottom": "Nach unten scrollen",
     "page_navigation": "Seitennavigation",
     "pin": "Panel anheften",
-    "unpin": "Panel lösen"
+    "unpin": "Panel lösen",
+    "contents": "Inhalt",
+    "language": "Sprache"
   },
   "reading_time": {
     "less_than_minute": "<1 Min.",
     "one_minute": "1 Min.",
     "minutes": "Min."
+  },
+  "editor": {
+    "video_title": "Video einfügen",
+    "video_prompt": "Video-URL oder fertigen HTML-Code einfügen:",
+    "video_not_supported": "Dein Browser unterstützt das Video-Tag nicht.",
+    "youtube_player_title": "YouTube-Videoplayer"
   }
 }

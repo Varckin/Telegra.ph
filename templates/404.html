@@ -2,15 +2,41 @@
 {% load static %}
 {% load locale_tags %}
 
+{% block title %}{% translate 'error.page_not_found' %} — {% translate 'site.title' %}{% endblock %}
+
 {% block content %}
 <div class="error-container">
+    <div class="error-illustration" aria-hidden="true">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="grad404" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#6c8cff"/>
+                    <stop offset="1" stop-color="#a855f7"/>
+                </linearGradient>
+            </defs>
+            <path d="M32 14h34l22 22v54a8 8 0 0 1-8 8H32a8 8 0 0 1-8-8V22a8 8 0 0 1 8-8z" stroke="url(#grad404)" stroke-width="3"/>
+            <path d="M66 14v18a4 4 0 0 0 4 4h18" stroke="url(#grad404)" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M36 52h26" stroke="#3a4152" stroke-width="3" stroke-linecap="round"/>
+            <path d="M36 64h34" stroke="#3a4152" stroke-width="3" stroke-linecap="round"/>
+            <path d="M36 76h22" stroke="#3a4152" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="79" cy="80" r="16" stroke="url(#grad404)" stroke-width="3"/>
+            <path d="m91 92 12 12" stroke="url(#grad404)" stroke-width="4" stroke-linecap="round"/>
+            <path d="M74 76a7 7 0 0 1 4-4" stroke="#8aa2ff" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+    </div>
     <div class="error-code">404</div>
     <h1 class="error-title">{% translate 'error.page_not_found' %}</h1>
     <p class="error-message">
         {% translate 'error.page_not_found_message' %}
     </p>
     <div class="back-link">
-        <a href="{% url 'post_create' %}">{% translate 'post.back_home' %}</a>
+        <a href="{% url 'post_create' %}" class="action-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 12H5"/>
+                <path d="m12 19-7-7 7-7"/>
+            </svg>
+            <span>{% translate 'post.back_home' %}</span>
+        </a>
     </div>
 </div>
 {% endblock %}

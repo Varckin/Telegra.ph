@@ -15,5 +15,8 @@ class PostConstants:
     )
     MAX_LEN_TITLE: int = 255
     MAX_LEN_CONTENT: int = 600000
+    RATE_LIMIT_WINDOW_SECONDS: int = 600
+    RATE_LIMIT_CREATE_MAX: int = 10
+    RATE_LIMIT_EDIT_MAX: int = 30
 
 CONSTANTS = PostConstants()

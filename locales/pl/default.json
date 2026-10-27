@@ -19,12 +19,14 @@
     "invalid_form": "Nieprawidłowy formularz.",
     "permission_denied": "Brak uprawnień.",
     "validation_error": "Błąd walidacji.",
+    "rate_limited": "Zbyt wiele żądań. Spróbuj ponownie później.",
     "network_error": "Błąd sieci.",
     "title_too_long": "Tytuł jest zbyt długi.",
-    "edited_prefix": "· edytowano",
-    "create_new": "← Utwórz nową notatkę",
-    "back_home": "← Powrót do strony głównej",
-    "download_pdf": "Pobierz PDF"
+    "edited_prefix": "edytowano",
+    "create_new": "Utwórz nową notatkę",
+    "back_home": "Wróć do strony głównej",
+    "download_pdf": "Pobierz PDF",
+    "copy_link": "Kopiuj link"
   },
   "error": {
     "page_not_found": "Strona nie znaleziona",
@@ -32,23 +34,38 @@
   },
   "js": {
     "draft_restored": "Przywrócono szkic",
-    "invalid_url": "Nieprawidłowy URL. Wprowadź URL rozpoczynający się od http:// lub https://, lub gotowy kod HTML.",
+    "invalid_url": "Nieprawidłowy URL. Wprowadź URL rozpoczynający się od http:// lub https://, lub gotowy HTML-код.",
     "post_created": "Post utworzony.",
     "post_updated": "Post zaktualizowany.",
     "server_error": "Błąd serwera.",
     "network_error": "Błąd sieci.",
-    "failed_create": "Nie udało się utworzyć posta."
+    "failed_create": "Nie udało się utworzyć posta.",
+    "publishing": "Publikowanie…",
+    "saving": "Zapisywanie…",
+    "link_copied": "Link skopiowany do schowka",
+    "copy_failed": "Nie udało się skopiować linku.",
+    "copy_code": "Kopiuj kod",
+    "code_copied": "Skopiowano!",
+    "click_to_copy_code": "Kliknij, aby skopiować"
   },
   "nav": {
     "scroll_top": "Przewiń do góry",
     "scroll_bottom": "Przewiń na dół",
     "page_navigation": "Nawigacja strony",
     "pin": "Przypnij panel",
-    "unpin": "Odepnij panel"
+    "unpin": "Odepnij panel",
+    "contents": "Spis treści",
+    "language": "Język"
   },
   "reading_time": {
     "less_than_minute": "<1 min",
     "one_minute": "1 min",
     "minutes": "min"
+  },
+  "editor": {
+    "video_title": "Wstaw wideo",
+    "video_prompt": "Wklej adres URL wideo lub gotowy kod HTML:",
+    "video_not_supported": "Twoja przeglądarka nie obsługuje znacznika video.",
+    "youtube_player_title": "Odtwarzacz wideo YouTube"
   }
 }

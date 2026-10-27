@@ -19,12 +19,14 @@
     "invalid_form": "Formulario inválido.",
     "permission_denied": "Permiso denegado.",
     "validation_error": "Error de validación.",
+    "rate_limited": "Demasiadas solicitudes. Inténtalo de nuevo más tarde.",
     "network_error": "Error de red.",
     "title_too_long": "El título es demasiado largo.",
-    "edited_prefix": "· editado",
-    "create_new": "← Crear nueva nota",
-    "back_home": "← Volver al inicio",
-    "download_pdf": "Descargar PDF"
+    "edited_prefix": "editado",
+    "create_new": "Crear nueva nota",
+    "back_home": "Volver al inicio",
+    "download_pdf": "Descargar PDF",
+    "copy_link": "Copiar enlace"
   },
   "error": {
     "page_not_found": "Página no encontrada",
@@ -37,18 +39,33 @@
     "post_updated": "Post actualizado.",
     "server_error": "Error del servidor.",
     "network_error": "Error de red.",
-    "failed_create": "Error al crear el post."
+    "failed_create": "Error al crear el post.",
+    "publishing": "Publicando…",
+    "saving": "Guardando…",
+    "link_copied": "Enlace copiado al portapapeles",
+    "copy_failed": "No se pudo copiar el enlace.",
+    "copy_code": "Copiar código",
+    "code_copied": "¡Copiado!",
+    "click_to_copy_code": "Haz clic para copiar"
   },
   "nav": {
     "scroll_top": "Desplazarse hacia arriba",
     "scroll_bottom": "Desplazarse hacia abajo",
     "page_navigation": "Navegación de página",
     "pin": "Fijar panel",
-    "unpin": "Desfijar panel"
+    "unpin": "Desfijar panel",
+    "contents": "Contenido",
+    "language": "Idioma"
   },
   "reading_time": {
     "less_than_minute": "<1 min",
     "one_minute": "1 min",
     "minutes": "min"
+  },
+  "editor": {
+    "video_title": "Insertar video",
+    "video_prompt": "Pega una URL de video o el código HTML listo:",
+    "video_not_supported": "Tu navegador no admite la etiqueta de video.",
+    "youtube_player_title": "Reproductor de video de YouTube"
   }
 }

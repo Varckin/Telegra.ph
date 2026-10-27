@@ -19,12 +19,14 @@
     "invalid_form": "表单无效。",
     "permission_denied": "权限被拒绝。",
     "validation_error": "验证错误。",
+    "rate_limited": "请求过于频繁，请稍后再试。",
     "network_error": "网络错误。",
     "title_too_long": "标题太长。",
-    "edited_prefix": "· 已编辑",
-    "create_new": "← 创建新笔记",
-    "back_home": "← 返回首页",
-    "download_pdf": "下载PDF"
+    "edited_prefix": "已编辑",
+    "create_new": "创建新笔记",
+    "back_home": "返回首页",
+    "download_pdf": "下载PDF",
+    "copy_link": "复制链接"
   },
   "error": {
     "page_not_found": "页面未找到",
@@ -37,18 +39,33 @@
     "post_updated": "帖子已更新。",
     "server_error": "服务器错误。",
     "network_error": "网络错误。",
-    "failed_create": "创建帖子失败。"
+    "failed_create": "创建帖子失败。",
+    "publishing": "发布中…",
+    "saving": "保存中…",
+    "link_copied": "链接已复制到剪贴板",
+    "copy_failed": "无法复制链接。",
+    "copy_code": "复制代码",
+    "code_copied": "已复制！",
+    "click_to_copy_code": "点击复制"
   },
   "nav": {
     "scroll_top": "向上滚动",
     "scroll_bottom": "向下滚动",
     "page_navigation": "页面导航",
     "pin": "固定面板",
-    "unpin": "取消固定面板"
+    "unpin": "取消固定面板",
+    "contents": "目录",
+    "language": "语言"
   },
   "reading_time": {
     "less_than_minute": "<1 分钟",
     "one_minute": "1 分钟",
     "minutes": "分钟"
+  },
+  "editor": {
+    "video_title": "插入视频",
+    "video_prompt": "粘贴视频链接或现成的HTML代码：",
+    "video_not_supported": "您的浏览器不支持视频标签。",
+    "youtube_player_title": "YouTube 视频播放器"
   }
 }

@@ -26,6 +26,7 @@ pillow==12.2.0
 propcache==0.5.2
 pycparser==3.0
 pydyf==0.12.1
+Pygments==2.21.0
 pyphen==0.17.2
 python-dotenv==1.2.2
 PyYAML==6.0.3

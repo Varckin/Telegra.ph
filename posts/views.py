@@ -1,14 +1,38 @@
+from django.conf import settings
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
-from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
 
+from posts.constants import CONSTANTS
 from posts.forms import PostForm
 from posts.models import Post
-from posts.services import (get_author_from_cookie, safe_markdown,
-                            set_author_cookie, get_or_create_author_from_cookie)
+from posts.services import (get_author_from_cookie, get_client_ip,
+                            rate_limit_exceeded, safe_redirect_path,
+                            safe_markdown, set_author_cookie,
+                            set_locale_cookie,
+                            get_or_create_author_from_cookie)
 
+
+def translate_message(request: HttpRequest, key: str, fallback: str) -> str:
+    translator = getattr(request, "translator", None)
+    if translator is not None:
+        try:
+            return translator.t(key)
+        except Exception:
+            return fallback
+    return fallback
+
+def rate_limited_response(request: HttpRequest) -> JsonResponse:
+    return JsonResponse(
+        {
+            "error": translate_message(
+                request,
+                "post.rate_limited",
+                "Too many requests. Please try again later."
+            )
+        },
+        status=429
+    )
 
 class CreatePostView(View):
     def get(self, request: HttpRequest) -> HttpResponse:
@@ -17,10 +41,21 @@ class CreatePostView(View):
         return render(request, "posts/create.html", {"form": form})
 
     def post(self, request: HttpRequest) -> JsonResponse:
+        client_ip = get_client_ip(request)
+        if rate_limit_exceeded(
+            f"rate_limit:post_create:{client_ip}",
+            CONSTANTS.RATE_LIMIT_CREATE_MAX,
+            CONSTANTS.RATE_LIMIT_WINDOW_SECONDS
+        ):
+            return rate_limited_response(request)
+
         form = PostForm(request.POST)
 
         if not form.is_valid():
-            return JsonResponse({"error": "Invalid form."}, status=400)
+            return JsonResponse(
+                {"error": translate_message(request, "post.invalid_form", "Invalid form.")},
+                status=400
+            )
 
         author, _ = get_or_create_author_from_cookie(request)
 
@@ -41,22 +76,36 @@ class PostDetailView(View):
         can_edit = (author is not None and author.pk == post.author.pk)
         html_content = safe_markdown(post.content)
 
-        return render(request, "posts/detail.html",{"post": post,
-                                                    "html_content": html_content,
-                                                    "can_edit": can_edit
-                                                    })
+        return render(request, "posts/detail.html", {"post": post,
+                                                     "html_content": html_content,
+                                                     "can_edit": can_edit
+                                                     })
 
     def post(self, request: HttpRequest, slug: str) -> JsonResponse:
         post = get_object_or_404(Post, slug=slug)
         author = get_author_from_cookie(request)
 
         if not author or author.pk != post.author.pk:
-            return JsonResponse({"error": "Permission denied."}, status=403)
+            return JsonResponse(
+                {"error": translate_message(request, "post.permission_denied", "Permission denied.")},
+                status=403
+            )
+
+        client_ip = get_client_ip(request)
+        if rate_limit_exceeded(
+            f"rate_limit:post_edit:{post.pk}:{client_ip}",
+            CONSTANTS.RATE_LIMIT_EDIT_MAX,
+            CONSTANTS.RATE_LIMIT_WINDOW_SECONDS
+        ):
+            return rate_limited_response(request)
 
         form = PostForm(request.POST, instance=post)
 
         if not form.is_valid():
-            return JsonResponse({"error": "Validation error."}, status=400)
+            return JsonResponse(
+                {"error": translate_message(request, "post.validation_error", "Validation error.")},
+                status=400
+            )
 
         form.save()
         new_html = safe_markdown(post.content)
@@ -69,12 +118,11 @@ class PostDetailView(View):
             }
         )
 
-@csrf_exempt
 def set_language(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         locale = request.POST.get('locale')
         if locale in settings.LOCALE_AVAILABLE:
-            response = redirect(request.META.get('HTTP_REFERER', '/'))
-            response.set_cookie(settings.LOCALE_COOKIE_NAME, locale, max_age=365*24*3600)
+            response = redirect(safe_redirect_path(request))
+            set_locale_cookie(response, locale)
             return response
     return redirect('post_create')

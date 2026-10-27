@@ -9,7 +9,7 @@
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     <meta property="og:image" content="{% static 'img/preview.jpg' %}" />
     <meta property="og:image:alt" content="{{ post.title|escape }}" />
-    
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ post.title|escape }}" />
     <meta name="twitter:description" content="{{ post.content|striptags|truncatechars:200|escape }}" />
@@ -18,119 +18,156 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
+{% block body_class %}page-post{% endblock %}
+
 {% block top_progress %}
     <div id="top-progress-container" class="top-progress-container">
         <div id="top-progress-fill" class="top-progress-fill"></div>
-        <span id="top-progress-time" class="top-progress-time">–</span>
-        <span id="top-progress-text" class="top-progress-text">0%</span>
+        <span id="top-progress-time" class="top-progress-chip top-progress-time">–</span>
+        <span id="top-progress-text" class="top-progress-chip top-progress-text">0%</span>
     </div>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div id="nav-sidebar" role="navigation" aria-label="{% translate 'nav.page_navigation' %}">
-            <div id="toc-wrapper">
-                <div class="_4ce999d _42b9b3d ds-scroll-area ds-scroll-area--enabled">
-                    <div class="ds-scroll-area__gutters">
-                        <div class="ds-scroll-area__horizontal-gutter">
-                            <div class="ds-scroll-area__horizontal-bar"></div>
-                        </div>
-                        <div class="ds-scroll-area__vertical-gutter">
-                            <div class="ds-scroll-area__vertical-bar"></div>
-                        </div>
-                    </div>
-                    <div class="ds-virtual-list" tabindex="0">
-                        <div class="ds-virtual-list-items">
-                            <div class="ds-virtual-list-visible-items">
-                            </div>
-                            <div class="ds-virtual-list-spacer"></div>
-                        </div>
-                    </div>
-                </div>
+    <div id="nav-sidebar" role="navigation" aria-label="{% translate 'nav.page_navigation' %}">
+        <div id="toc-wrapper">
+            <div class="toc-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8 6h13"/>
+                    <path d="M8 12h13"/>
+                    <path d="M8 18h13"/>
+                    <path d="M3 6h.01"/>
+                    <path d="M3 12h.01"/>
+                    <path d="M3 18h.01"/>
+                </svg>
+                <span class="toc-header-label">{% translate 'nav.contents' %}</span>
             </div>
+            <div id="toc-list" class="toc-list"></div>
         </div>
-
-        <div id="viewer-container">
-            <article>
-                <h1 id="post-title-view">{{ post.title }}</h1>
-
-                <div class="post-meta">
-                    <span class="created-at">{{ post.created_at|date:"d.m.Y H:i" }}</span>
-                    <span class="edited-line">
-                        {% if post.updated_at != post.created_at %}
-                        {% translate 'post.edited_prefix' %} {{ post.updated_at|date:"d.m.Y H:i" }}
-                        {% endif %}
-                    </span>
-                </div>
-
-                <div id="post-content-view" class="content">
-                    {{ html_content|safe }}
-                </div>
-            </article>
-
-            <div class="post-actions">
-                {% if can_edit %}
-                    <button id="edit-button" class="action-btn edit-btn">{% translate 'post.edit' %}</button>
-                {% endif %}
-                <a href="{% url 'post_pdf' slug=post.slug %}" class="action-btn pdf-btn" target="_blank" rel="noopener noreferrer">
-                    {% translate 'post.download_pdf' %}
-                </a>
-            </div>
-        </div>
-
-        <div id="editor-container">
-            <form
-                id="edit-form"
-                data-slug="{{ post.slug }}"
-                data-original-title="{{ post.title }}"
-            >
-                {% csrf_token %}
-
-                <div class="edit-form-group">
-                    <input
-                        type="text"
-                        id="edit-title"
-                        name="title"
-                        class="edit-input"
-                        placeholder="Title"
-                        value="{{ post.title }}"
-                    >
-                </div>
-
-                <div class="edit-form-group">
-                    <textarea
-                        id="edit-content"
-                        name="content"
-                        class="edit-textarea"
-                        rows="15"
-                        placeholder="Content"
-                    >{{ post.content }}</textarea>
-                </div>
-
-                <div class="edit-actions">
-                    <button
-                        type="submit"
-                        id="publish-button"
-                        class="save-btn"
-                    >
-                        {% translate 'post.save' %}
-                    </button>
-
-                    <button
-                        type="button"
-                        id="cancel-button"
-                        class="cancel-btn"
-                    >
-                        {% translate 'post.cancel' %}
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <p class="back-link">
-            <a href="{% url 'post_create' %}">
-                {% translate 'post.create_new' %}
-            </a>
-        </p>
     </div>
+
+    <div id="viewer-container">
+        <article class="post-article">
+            <h1 id="post-title-view" class="post-title">{{ post.title }}</h1>
+
+            <div class="post-meta">
+                <span class="meta-item created-at">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <path d="M16 2v4"/>
+                        <path d="M8 2v4"/>
+                        <path d="M3 10h18"/>
+                    </svg>
+                    <span>{{ post.created_at|date:"d.m.Y H:i" }}</span>
+                </span>
+                {% if post.updated_at != post.created_at %}
+                <span class="meta-item edited-line">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                        <path d="m15 5 4 4"/>
+                    </svg>
+                    <span>{% translate 'post.edited_prefix' %} {{ post.updated_at|date:"d.m.Y H:i" }}</span>
+                </span>
+                {% endif %}
+            </div>
+
+            <div id="post-content-view" class="content">
+                {{ html_content|safe }}
+            </div>
+        </article>
+
+        <div class="post-actions">
+            {% if can_edit %}
+                <button id="edit-button" type="button" class="action-btn edit-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                        <path d="m15 5 4 4"/>
+                    </svg>
+                    <span class="btn-label">{% translate 'post.edit' %}</span>
+                </button>
+            {% endif %}
+            <button id="copy-link-button" type="button" class="action-btn copy-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+                <span class="btn-label">{% translate 'post.copy_link' %}</span>
+            </button>
+            <a href="{% url 'post_pdf' slug=post.slug %}" class="action-btn pdf-btn" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <path d="m7 10 5 5 5-5"/>
+                    <path d="M12 15V3"/>
+                </svg>
+                <span class="btn-label">{% translate 'post.download_pdf' %}</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="editor-container">
+        <form
+            id="edit-form"
+            data-slug="{{ post.slug }}"
+            data-original-title="{{ post.title }}"
+        >
+            {% csrf_token %}
+
+            <div class="edit-form-group">
+                <input
+                    type="text"
+                    id="edit-title"
+                    name="title"
+                    class="edit-input"
+                    placeholder="{% translate 'post.title' %}"
+                    value="{{ post.title }}"
+                    required
+                >
+            </div>
+
+            <div class="edit-form-group">
+                <textarea
+                    id="edit-content"
+                    name="content"
+                    class="edit-textarea"
+                    rows="15"
+                    placeholder="{% translate 'post.content' %}"
+                >{{ post.content }}</textarea>
+            </div>
+
+            <div class="edit-actions">
+                <button
+                    type="submit"
+                    id="publish-button"
+                    class="primary-btn save-btn"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M20 6 9 17l-5-5"/>
+                    </svg>
+                    <span class="btn-label">{% translate 'post.save' %}</span>
+                </button>
+
+                <button
+                    type="button"
+                    id="cancel-button"
+                    class="action-btn cancel-btn"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M18 6 6 18"/>
+                        <path d="m6 6 12 12"/>
+                    </svg>
+                    <span class="btn-label">{% translate 'post.cancel' %}</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <p class="back-link">
+        <a href="{% url 'post_create' %}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 12H5"/>
+                <path d="m12 19-7-7 7-7"/>
+            </svg>
+            <span>{% translate 'post.create_new' %}</span>
+        </a>
+    </p>
 {% endblock %}

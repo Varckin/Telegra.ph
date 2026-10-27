@@ -11,6 +11,7 @@
                 name="title"
                 class="telegraph-input"
                 placeholder="{% translate 'post.title' %}"
+                aria-label="{% translate 'post.title' %}"
                 autofocus
                 required
             >
@@ -21,12 +22,17 @@
                 name="content"
                 class="telegraph-textarea"
                 placeholder="{% translate 'post.content' %}"
+                aria-label="{% translate 'post.content' %}"
                 rows="12"
             ></textarea>
         </div>
 
-        <button type="submit" class="publish-btn">
-            {% translate 'post.publish' %}
+        <button type="submit" class="primary-btn publish-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m22 2-7 20-4-9-9-4Z"/>
+                <path d="M22 2 11 13"/>
+            </svg>
+            <span class="btn-label">{% translate 'post.publish' %}</span>
         </button>
     </form>
 {% endblock %}

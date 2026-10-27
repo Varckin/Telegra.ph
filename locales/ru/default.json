@@ -19,12 +19,14 @@
     "invalid_form": "Неверная форма.",
     "permission_denied": "Доступ запрещён.",
     "validation_error": "Ошибка валидации.",
+    "rate_limited": "Слишком много запросов. Пожалуйста, попробуйте позже.",
     "network_error": "Ошибка сети.",
     "title_too_long": "Слишком длинный заголовок.",
-    "edited_prefix": "· изменено",
-    "create_new": "← Создать новую заметку",
-    "back_home": "← На главную",
-    "download_pdf": "Скачать PDF"
+    "edited_prefix": "изменено",
+    "create_new": "Создать новую заметку",
+    "back_home": "На главную",
+    "download_pdf": "Скачать PDF",
+    "copy_link": "Копировать ссылку"
   },
   "error": {
     "page_not_found": "Страница не найдена",
@@ -37,18 +39,33 @@
     "post_updated": "Пост обновлён.",
     "server_error": "Ошибка сервера.",
     "network_error": "Ошибка сети.",
-    "failed_create": "Не удалось создать пост."
+    "failed_create": "Не удалось создать пост.",
+    "publishing": "Публикация…",
+    "saving": "Сохранение…",
+    "link_copied": "Ссылка скопирована в буфер обмена",
+    "copy_failed": "Не удалось скопировать ссылку.",
+    "copy_code": "Копировать код",
+    "code_copied": "Скопировано!",
+    "click_to_copy_code": "Нажмите, чтобы скопировать"
   },
   "nav": {
     "scroll_top": "Наверх",
     "scroll_bottom": "Вниз",
     "page_navigation": "Навигация по странице",
     "pin": "Закрепить панель",
-    "unpin": "Открепить панель"
+    "unpin": "Открепить панель",
+    "contents": "Содержание",
+    "language": "Язык"
   },
   "reading_time": {
     "less_than_minute": "<1 мин",
     "one_minute": "1 мин",
     "minutes": "мин"
+  },
+  "editor": {
+    "video_title": "Вставить видео",
+    "video_prompt": "Вставьте ссылку на видео или готовый HTML-код:",
+    "video_not_supported": "Ваш браузер не поддерживает тег video.",
+    "youtube_player_title": "Видеоплеер YouTube"
   }
 }

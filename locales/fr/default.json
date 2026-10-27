@@ -19,12 +19,14 @@
     "invalid_form": "Formulaire invalide.",
     "permission_denied": "Permission refusée.",
     "validation_error": "Erreur de validation.",
+    "rate_limited": "Trop de requêtes. Veuillez réessayer plus tard.",
     "network_error": "Erreur réseau.",
     "title_too_long": "Le titre est trop long.",
-    "edited_prefix": "· modifié",
-    "create_new": "← Créer une nouvelle note",
-    "back_home": "← Retour à l'accueil",
-    "download_pdf": "Télécharger PDF"
+    "edited_prefix": "modifié",
+    "create_new": "Créer une nouvelle note",
+    "back_home": "Retour à l'accueil",
+    "download_pdf": "Télécharger PDF",
+    "copy_link": "Copier le lien"
   },
   "error": {
     "page_not_found": "Page non trouvée",
@@ -37,18 +39,33 @@
     "post_updated": "Publication mise à jour.",
     "server_error": "Erreur serveur.",
     "network_error": "Erreur réseau.",
-    "failed_create": "Échec de la création de la publication."
+    "failed_create": "Échec de la création de la publication.",
+    "publishing": "Publication…",
+    "saving": "Enregistrement…",
+    "link_copied": "Lien copié dans le presse-papiers",
+    "copy_failed": "Impossible de copier le lien.",
+    "copy_code": "Copier le code",
+    "code_copied": "Copié !",
+    "click_to_copy_code": "Cliquez pour copier"
   },
   "nav": {
     "scroll_top": "Faire défiler vers le haut",
     "scroll_bottom": "Faire défiler vers le bas",
     "page_navigation": "Navigation de la page",
     "pin": "Épingler le panneau",
-    "unpin": "Détacher le panneau"
+    "unpin": "Détacher le panneau",
+    "contents": "Sommaire",
+    "language": "Langue"
   },
   "reading_time": {
     "less_than_minute": "<1 min",
     "one_minute": "1 min",
     "minutes": "min"
+  },
+  "editor": {
+    "video_title": "Insérer une vidéo",
+    "video_prompt": "Collez une URL de vidéo ou le code HTML prêt :",
+    "video_not_supported": "Votre navigateur ne prend pas en charge la balise vidéo.",
+    "youtube_player_title": "Lecteur vidéo YouTube"
   }
 }
